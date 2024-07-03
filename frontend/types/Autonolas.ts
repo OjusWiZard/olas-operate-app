@@ -6,7 +6,7 @@ export type StakingRewardsInfo = {
   rewardsPerSecond: number;
   isEligibleForRewards: boolean;
   availableRewardsForEpoch: number;
-  accruedServiceStakingRewards: number;
+  unclaimedServiceStakingRewards: number;
   minimumStakedAmount: number;
 };
 

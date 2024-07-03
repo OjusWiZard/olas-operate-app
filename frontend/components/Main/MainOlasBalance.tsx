@@ -54,7 +54,8 @@ const OVERLAY_STYLE = { maxWidth: '300px', width: '300px' };
 
 const CurrentBalance = () => {
   const { totalOlasBalance, totalOlasStakedBalance } = useBalance();
-  const { accruedServiceStakingRewards } = useReward();
+  const { unclaimedServiceStakingRewards, optimisticRewardsEarnedForEpoch } =
+    useReward();
 
   const balances = useMemo(() => {
     return [
@@ -64,7 +65,7 @@ const CurrentBalance = () => {
       },
       {
         title: 'Unclaimed rewards',
-        value: balanceFormat(accruedServiceStakingRewards ?? 0, 2),
+        value: balanceFormat(unclaimedServiceStakingRewards ?? 0, 2),
       },
       {
         // Unused funds should only be ‘free-floating’ OLAS that is neither unclaimed nor staked.
@@ -72,12 +73,18 @@ const CurrentBalance = () => {
         value: balanceFormat(
           (totalOlasBalance ?? 0) -
             (totalOlasStakedBalance ?? 0) -
-            (accruedServiceStakingRewards ?? 0),
+            (unclaimedServiceStakingRewards ?? 0) -
+            (optimisticRewardsEarnedForEpoch ?? 0),
           2,
         ),
       },
     ];
-  }, [accruedServiceStakingRewards, totalOlasBalance, totalOlasStakedBalance]);
+  }, [
+    unclaimedServiceStakingRewards,
+    optimisticRewardsEarnedForEpoch,
+    totalOlasBalance,
+    totalOlasStakedBalance,
+  ]);
 
   return (
     <Text type="secondary">

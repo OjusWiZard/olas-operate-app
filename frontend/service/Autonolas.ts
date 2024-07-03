@@ -78,7 +78,7 @@ const getAgentStakingRewardsInfo = async ({
     livenessPeriod,
     livenessRatio,
     rewardsPerSecond,
-    accuredStakingReward,
+    unclaimedServiceStakingReward,
     minStakingDeposit,
     tsCheckpoint,
   ] = multicallResponse;
@@ -130,8 +130,8 @@ const getAgentStakingRewardsInfo = async ({
     rewardsPerSecond,
     isEligibleForRewards,
     availableRewardsForEpoch,
-    accruedServiceStakingRewards: parseFloat(
-      ethers.utils.formatEther(`${accuredStakingReward}`),
+    unclaimedServiceStakingRewards: parseFloat(
+      ethers.utils.formatEther(`${unclaimedServiceStakingReward}`),
     ),
     minimumStakedAmount,
   } as StakingRewardsInfo;

@@ -69,8 +69,10 @@ export const BalanceProvider = ({ children }: PropsWithChildren) => {
   const { wallets, masterEoaAddress, masterSafeAddress } =
     useContext(WalletContext);
   const { services, serviceAddresses } = useContext(ServicesContext);
-  const { optimisticRewardsEarnedForEpoch, accruedServiceStakingRewards } =
-    useContext(RewardContext);
+  const {
+    optimisticRewardsEarnedForEpoch,
+    unclaimedServiceStakingRewards: unclaimedServiceStakingRewards,
+  } = useContext(RewardContext);
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
@@ -101,11 +103,11 @@ export const BalanceProvider = ({ children }: PropsWithChildren) => {
       (olasDepositBalance ?? 0) +
       (olasBondBalance ?? 0) +
       (optimisticRewardsEarnedForEpoch ?? 0) +
-      (accruedServiceStakingRewards ?? 0);
+      (unclaimedServiceStakingRewards ?? 0);
 
     return total;
   }, [
-    accruedServiceStakingRewards,
+    unclaimedServiceStakingRewards,
     isLoaded,
     olasBondBalance,
     olasDepositBalance,

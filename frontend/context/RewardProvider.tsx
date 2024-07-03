@@ -18,7 +18,7 @@ import { OnlineStatusContext } from './OnlineStatusProvider';
 import { ServicesContext } from './ServicesProvider';
 
 export const RewardContext = createContext<{
-  accruedServiceStakingRewards?: number;
+  unclaimedServiceStakingRewards?: number;
   availableRewardsForEpoch?: number;
   availableRewardsForEpochEth?: number;
   isEligibleForRewards?: boolean;
@@ -26,7 +26,7 @@ export const RewardContext = createContext<{
   minimumStakedAmountRequired?: number;
   updateRewards: () => Promise<void>;
 }>({
-  accruedServiceStakingRewards: undefined,
+  unclaimedServiceStakingRewards: undefined,
   availableRewardsForEpoch: undefined,
   availableRewardsForEpochEth: undefined,
   isEligibleForRewards: undefined,
@@ -42,7 +42,7 @@ export const RewardProvider = ({ children }: PropsWithChildren) => {
   const { storeState } = useStore();
   const electronApi = useElectronApi();
 
-  const [accruedServiceStakingRewards, setAccruedServiceStakingRewards] =
+  const [unclaimedServiceStakingRewards, setUnclaimedServiceStakingRewards] =
     useState<number>();
   const [availableRewardsForEpoch, setAvailableRewardsForEpoch] =
     useState<number>();
@@ -83,8 +83,8 @@ export const RewardProvider = ({ children }: PropsWithChildren) => {
     ]);
 
     setIsEligibleForRewards(stakingRewardsInfo?.isEligibleForRewards);
-    setAccruedServiceStakingRewards(
-      stakingRewardsInfo?.accruedServiceStakingRewards,
+    setUnclaimedServiceStakingRewards(
+      stakingRewardsInfo?.unclaimedServiceStakingRewards,
     );
     setMinimumStakedAmountRequired(stakingRewardsInfo?.minimumStakedAmount);
     setAvailableRewardsForEpoch(rewards);
@@ -105,7 +105,7 @@ export const RewardProvider = ({ children }: PropsWithChildren) => {
   return (
     <RewardContext.Provider
       value={{
-        accruedServiceStakingRewards,
+        unclaimedServiceStakingRewards,
         availableRewardsForEpoch,
         availableRewardsForEpochEth,
         isEligibleForRewards,
