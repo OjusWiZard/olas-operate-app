@@ -24,11 +24,12 @@ const { Title } = Typography;
 
 export const SetupWelcome = () => {
   const electronApi = useElectronApi();
-  const [isSetup, setIsSetup] = useState<AccountIsSetup>(
-    AccountIsSetup.Loading,
-  );
+  const [isSetup, setIsSetup] = useState<AccountIsSetup | null>(null);
 
   useEffect(() => {
+    if (isSetup !== null) return;
+    setIsSetup(AccountIsSetup.Loading);
+
     AccountService.getAccount()
       .then((res) => {
         switch (res.is_setup) {
@@ -51,7 +52,7 @@ export const SetupWelcome = () => {
         console.error(e);
         setIsSetup(AccountIsSetup.Error);
       });
-  }, []);
+  }, [electronApi.store, isSetup]);
 
   const welcomeScreen = useMemo(() => {
     switch (isSetup) {
