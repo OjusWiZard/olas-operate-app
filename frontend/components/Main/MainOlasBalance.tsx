@@ -65,7 +65,11 @@ const CurrentBalance = () => {
       },
       {
         title: 'Unclaimed rewards',
-        value: balanceFormat(unclaimedServiceStakingRewards ?? 0, 2),
+        value: balanceFormat(
+          (unclaimedServiceStakingRewards ?? 0) +
+            (optimisticRewardsEarnedForEpoch ?? 0),
+          2,
+        ),
       },
       {
         // Unused funds should only be ‘free-floating’ OLAS that is neither unclaimed nor staked.
