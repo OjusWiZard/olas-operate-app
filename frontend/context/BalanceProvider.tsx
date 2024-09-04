@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import { isAddress } from 'ethers/lib/utils';
-import { isNumber } from 'lodash';
+import { isNil, isNumber } from 'lodash';
 import { ValueOf } from 'next/dist/shared/lib/constants';
 import {
   createContext,
@@ -215,10 +215,9 @@ export const BalanceProvider = ({ children }: PropsWithChildren) => {
     [services, walletBalances],
   );
   const isLowBalance = useMemo(() => {
-    if (!safeBalance || !agentSafeBalance) return false;
+    if (isNil(safeBalance) || isNil(agentSafeBalance)) return false;
     if (
-      safeBalance.ETH < LOW_MASTER_SAFE_BALANCE &&
-      // Need to check agentSafe balance as well, because it's auto-funded from safeBalance
+      safeBalance.ETH < LOW_MASTER_SAFE_BALANCE ||
       agentSafeBalance.ETH < LOW_AGENT_SAFE_BALANCE
     )
       return true;
