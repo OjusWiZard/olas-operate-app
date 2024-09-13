@@ -46,9 +46,17 @@ const main = async () => {
       mac: {
         target: [
           {
-            target: 'default',
-            arch: ['x64', 'arm64'],
+            target: 'dmg',
+            arch: ['arm64'],
           },
+          {
+            target: 'dmg',
+            arch: ['x64']
+          },
+          {
+            target: 'dmg',
+            arch: ['universal']
+          }
         ],
         publish: publishOptions,
         category: 'public.app-category.utilities',
