@@ -96,6 +96,11 @@ export const BalanceProvider = ({ children }: PropsWithChildren) => {
     );
   }, [isLoaded, walletBalances]);
 
+  const totalOlasStakedBalance: number | undefined = useMemo(() => {
+    if (!isLoaded) return;
+    return (olasBondBalance ?? 0) + (olasDepositBalance ?? 0);
+  }, [isLoaded, olasBondBalance, olasDepositBalance]);
+
   const totalOlasBalance: number | undefined = useMemo(() => {
     if (!isLoaded) return;
 
@@ -106,8 +111,7 @@ export const BalanceProvider = ({ children }: PropsWithChildren) => {
 
     const total =
       sumWalletBalances +
-      (olasDepositBalance ?? 0) +
-      (olasBondBalance ?? 0) +
+      (totalOlasStakedBalance ?? 0) +
       (optimisticRewardsEarnedForEpoch ?? 0) +
       (accruedServiceStakingRewards ?? 0);
 
@@ -115,16 +119,10 @@ export const BalanceProvider = ({ children }: PropsWithChildren) => {
   }, [
     accruedServiceStakingRewards,
     isLoaded,
-    olasBondBalance,
-    olasDepositBalance,
     optimisticRewardsEarnedForEpoch,
+    totalOlasStakedBalance,
     walletBalances,
   ]);
-
-  const totalOlasStakedBalance: number | undefined = useMemo(() => {
-    if (!isLoaded) return;
-    return (olasBondBalance ?? 0) + (olasDepositBalance ?? 0);
-  }, [isLoaded, olasBondBalance, olasDepositBalance]);
 
   const updateBalances = useCallback(async (): Promise<void> => {
     if (!masterEoaAddress) return;

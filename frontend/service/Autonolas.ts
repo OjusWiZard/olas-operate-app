@@ -339,6 +339,12 @@ const getServiceRegistryInfo = async (
     mapServicesResponse.state as ServiceRegistryL2ServiceState,
   ];
 
+  console.log({
+    bondValue,
+    depositValue,
+    serviceState,
+  });
+
   return {
     bondValue,
     depositValue,
