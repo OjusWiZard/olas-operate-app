@@ -5,7 +5,7 @@ import { groupBy } from 'lodash';
 import { z } from 'zod';
 
 import { Chain } from '@/client';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contractAddresses';
+import { STAKING_TOKEN_PROXY_ADDRESS } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { useServices } from '@/hooks/useServices';
@@ -25,9 +25,9 @@ const RewardHistoryResponseSchema = z.object({
 type RewardHistoryResponse = z.infer<typeof RewardHistoryResponseSchema>;
 
 const betaAddress =
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS].pearl_beta;
+  STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS].pearl_beta;
 const beta2Address =
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS]
+  STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS]
     .pearl_beta_2;
 
 const SUBGRAPH_URL =

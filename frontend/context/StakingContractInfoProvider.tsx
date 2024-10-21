@@ -14,11 +14,11 @@ import { useInterval } from 'usehooks-ts';
 import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
 import { StakingProgramId } from '@/enums/StakingProgram';
-import { AutonolasService } from '@/service/Autonolas';
+import { AutonolasService } from '@/service/contract/Autonolas';
 import { StakingContractInfo } from '@/types/Autonolas';
 
 import { ServicesContext } from './ServicesProvider';
-import { StakingProgramContext } from './StakingProgramContext';
+import { StakingProgramContext } from './StakingProgramProvider';
 
 type StakingContractInfoContextProps = {
   activeStakingContractInfo?: Partial<StakingContractInfo>;

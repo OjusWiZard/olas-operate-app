@@ -1,67 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
-import { gql, request } from 'graphql-request';
 import { groupBy } from 'lodash';
 import { useEffect, useMemo } from 'react';
-import { z } from 'zod';
 
 import { Chain } from '@/client';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contractAddresses';
+import { STAKING_TOKEN_PROXY_ADDRESS } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
 import { SUBGRAPH_URL } from '@/constants/urls';
+import { ReactQueryKey } from '@/enums/ReactQueryKey';
 import { StakingProgramId } from '@/enums/StakingProgram';
+import TheGraphService from '@/service/the-graph';
+import { CheckpointGraphResponse } from '@/service/the-graph/pearl-staking-rewards/types';
 
 import { useServices } from './useServices';
 
 const ONE_DAY_IN_S = 24 * 60 * 60;
 const ONE_DAY_IN_MS = ONE_DAY_IN_S * 1000;
 
-const CheckpointGraphResponseSchema = z.object({
-  epoch: z.string({
-    message: 'Expected epoch to be a string',
-  }),
-  rewards: z.array(z.string(), {
-    message: 'Expected rewards to be an array of strings',
-  }),
-  serviceIds: z.array(z.string(), {
-    message: 'Expected serviceIds to be an array of strings',
-  }),
-  blockTimestamp: z.string({
-    message: 'Expected blockTimestamp to be a string',
-  }),
-  transactionHash: z.string({
-    message: 'Expected transactionHash to be a string',
-  }),
-  epochLength: z.string({
-    message: 'Expected epochLength to be a string',
-  }),
-  contractAddress: z.string({
-    message: 'Expected contractAddress to be a string',
-  }),
-});
-type CheckpointGraphResponse = z.infer<typeof CheckpointGraphResponseSchema>;
-
 const betaAddress =
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS].pearl_beta;
+  STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS].pearl_beta;
 const beta2Address =
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS]
+  STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS]
     .pearl_beta_2;
-
-const fetchRewardsQuery = gql`
-  {
-    checkpoints(orderBy: epoch, orderDirection: desc) {
-      id
-      availableRewards
-      blockTimestamp
-      contractAddress
-      epoch
-      epochLength
-      rewards
-      serviceIds
-      transactionHash
-    }
-  }
-`;
 
 type TransformedCheckpoint = {
   epoch: string;
@@ -137,10 +97,10 @@ const transformCheckpoints = (
  * NOTE: Assumes that the switch of the contract was completed AND the rewards are received in the same epoch.
  */
 const getTimestampOfFirstReward = (
-  epochs: CheckpointGraphResponse[],
+  checkpoints: CheckpointGraphResponse[],
   serviceId: number,
 ) => {
-  const timestamp = epochs
+  const timestamp = checkpoints
     .toReversed()
     .find((epochDetails) =>
       epochDetails.serviceIds.includes(`${serviceId}`),
@@ -153,13 +113,9 @@ export const useRewardsHistory = () => {
   const { serviceId } = useServices();
 
   const { data, isError, isLoading, isFetching, refetch } = useQuery({
-    queryKey: [],
-    async queryFn() {
-      const checkpointsResponse: {
-        checkpoints: CheckpointGraphResponse[];
-      } = await request(SUBGRAPH_URL, fetchRewardsQuery);
-      return checkpointsResponse;
-    },
+    queryKey: [ReactQueryKey.Checkpoints],
+    queryFn: async () =>
+      TheGraphService.pearlStakingRewards.getCheckpoints(SUBGRAPH_URL),
     select: ({ checkpoints }) => {
       const checkpointsByContractAddress = groupBy(
         checkpoints,

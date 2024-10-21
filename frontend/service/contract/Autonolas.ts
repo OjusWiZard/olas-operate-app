@@ -6,14 +6,14 @@ import { AGENT_MECH_ABI } from '@/abis/agentMech';
 import { MECH_ACTIVITY_CHECKER_ABI } from '@/abis/mechActivityChecker';
 import { SERVICE_REGISTRY_L2_ABI } from '@/abis/serviceRegistryL2';
 import { SERVICE_REGISTRY_TOKEN_UTILITY_ABI } from '@/abis/serviceRegistryTokenUtility';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_ABI } from '@/abis/serviceStakingTokenMechUsage';
+import { STAKING_TOKEN_PROXY_ABI } from '@/abis/stakingTokenProxy';
 import { Chain } from '@/client';
 import {
   AGENT_MECH_CONTRACT_ADDRESS,
   MECH_ACTIVITY_CHECKER_CONTRACT_ADDRESS,
   SERVICE_REGISTRY_L2_CONTRACT_ADDRESS,
   SERVICE_REGISTRY_TOKEN_UTILITY_CONTRACT_ADDRESS,
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES,
+  STAKING_TOKEN_PROXY_ADDRESS,
 } from '@/constants/contractAddresses';
 import { gnosisMulticallProvider } from '@/constants/providers';
 import { ServiceRegistryL2ServiceState } from '@/enums/ServiceRegistryL2ServiceState';
@@ -29,7 +29,7 @@ const agentMechContract = new MulticallContract(
   AGENT_MECH_ABI.filter((abi) => abi.type === 'function'), // weird bug in the package where their filter doesn't work..
 );
 
-const ServiceStakingTokenAbi = SERVICE_STAKING_TOKEN_MECH_USAGE_ABI.filter(
+const ServiceStakingTokenAbi = STAKING_TOKEN_PROXY_ABI.filter(
   (abi) => abi.type === 'function',
 );
 
@@ -38,21 +38,15 @@ const serviceStakingTokenMechUsageContracts: Record<
   MulticallContract
 > = {
   [StakingProgramId.Alpha]: new MulticallContract(
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
-      StakingProgramId.Alpha
-    ],
+    STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS][StakingProgramId.Alpha],
     ServiceStakingTokenAbi,
   ),
   [StakingProgramId.Beta]: new MulticallContract(
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
-      StakingProgramId.Beta
-    ],
+    STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS][StakingProgramId.Beta],
     ServiceStakingTokenAbi,
   ),
   [StakingProgramId.Beta2]: new MulticallContract(
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
-      StakingProgramId.Beta2
-    ],
+    STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS][StakingProgramId.Beta2],
     ServiceStakingTokenAbi,
   ),
 };

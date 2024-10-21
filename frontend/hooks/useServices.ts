@@ -8,8 +8,8 @@ import {
 } from '@/client';
 import { CHAINS } from '@/constants/chains';
 import { ServicesContext } from '@/context/ServicesProvider';
-import MulticallService from '@/service/Multicall';
-import { ServicesService } from '@/service/Services';
+import MulticallService from '@/service/contract/Multicall';
+import { ServicesService } from '@/service/middleware/Services';
 import { Address } from '@/types/Address';
 import { AddressBooleanRecord } from '@/types/Records';
 

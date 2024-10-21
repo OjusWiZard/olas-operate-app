@@ -13,8 +13,8 @@ import { useStakingContractInfo } from '@/hooks/useStakingContractInfo';
 import { useStakingProgram } from '@/hooks/useStakingProgram';
 import { useStore } from '@/hooks/useStore';
 import { useWallet } from '@/hooks/useWallet';
-import { ServicesService } from '@/service/Services';
-import { WalletService } from '@/service/Wallet';
+import { ServicesService } from '@/service/middleware/Services';
+import { WalletService } from '@/service/middleware/Wallet';
 import { delayInSeconds } from '@/utils/delay';
 import { getMinimumStakedAmountRequired } from '@/utils/service';
 

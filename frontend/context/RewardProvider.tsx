@@ -14,11 +14,11 @@ import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
 import { useElectronApi } from '@/hooks/useElectronApi';
 import { useStore } from '@/hooks/useStore';
-import { AutonolasService } from '@/service/Autonolas';
+import { AutonolasService } from '@/service/contract/Autonolas';
 
 import { OnlineStatusContext } from './OnlineStatusProvider';
 import { ServicesContext } from './ServicesProvider';
-import { StakingProgramContext } from './StakingProgramContext';
+import { StakingProgramContext } from './StakingProgramProvider';
 
 export const RewardContext = createContext<{
   accruedServiceStakingRewards?: number;

@@ -3,7 +3,7 @@ import { useInterval } from 'usehooks-ts';
 
 import { Wallet } from '@/client';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
-import { WalletService } from '@/service/Wallet';
+import { WalletService } from '@/service/middleware/Wallet';
 import { Address } from '@/types/Address';
 
 import { OnlineStatusContext } from './OnlineStatusProvider';

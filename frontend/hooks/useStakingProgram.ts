@@ -1,9 +1,9 @@
 import { useContext, useMemo } from 'react';
 
 import { Chain } from '@/client';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contractAddresses';
+import { STAKING_TOKEN_PROXY_ADDRESS } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
-import { StakingProgramContext } from '@/context/StakingProgramContext';
+import { StakingProgramContext } from '@/context/StakingProgramProvider';
 
 /**
  * Hook to get the active staking program and its metadata, and the default staking program.
@@ -35,15 +35,11 @@ export const useStakingProgram = () => {
 
   const activeStakingProgramAddress = useMemo(() => {
     if (!activeStakingProgramId) return;
-    return SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
-      activeStakingProgramId
-    ];
+    return STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS][activeStakingProgramId];
   }, [activeStakingProgramId]);
 
   const defaultStakingProgramAddress =
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
-      defaultStakingProgramId
-    ];
+    STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS][defaultStakingProgramId];
 
   return {
     activeStakingProgramAddress,

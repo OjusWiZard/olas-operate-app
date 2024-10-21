@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import { Chain } from '@/client';
 import { CardSection } from '@/components/styled/CardSection';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contractAddresses';
+import { STAKING_TOKEN_PROXY_ADDRESS } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { StakingProgramId } from '@/enums/StakingProgram';
@@ -32,7 +32,7 @@ export const StakingContractSection = ({
   const { migrateValidation } = useMigrate(stakingProgramId);
 
   const stakingContractAddress =
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
+    STAKING_TOKEN_PROXY_ADDRESS[Chain.GNOSIS][
       stakingProgramId
     ];
 

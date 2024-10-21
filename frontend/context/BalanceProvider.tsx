@@ -24,9 +24,9 @@ import {
 import { TOKENS } from '@/constants/tokens';
 import { ServiceRegistryL2ServiceState } from '@/enums/ServiceRegistryL2ServiceState';
 import { Token } from '@/enums/Token';
-import { AutonolasService } from '@/service/Autonolas';
-import { EthersService } from '@/service/Ethers';
-import MulticallService from '@/service/Multicall';
+import { AutonolasService } from '@/service/contract/Autonolas';
+import { EthersService } from '@/service/contract/Ethers';
+import MulticallService from '@/service/contract/Multicall';
 import { Address } from '@/types/Address';
 import {
   AddressNumberRecord,

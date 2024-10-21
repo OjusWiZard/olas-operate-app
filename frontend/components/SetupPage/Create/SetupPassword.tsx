@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { Chain } from '@/client';
 import { SetupScreen } from '@/enums/SetupScreen';
 import { useSetup } from '@/hooks/useSetup';
-import { AccountService } from '@/service/Account';
-import { WalletService } from '@/service/Wallet';
+import { AccountService } from '@/service/middleware/Account';
+import { WalletService } from '@/service/middleware/Wallet';
 
 import { CardFlex } from '../../styled/CardFlex';
 import { SetupCreateHeader } from './SetupCreateHeader';

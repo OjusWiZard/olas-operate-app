@@ -8,7 +8,7 @@ import {
 import { useInterval } from 'usehooks-ts';
 
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
-import { GnosisSafeService } from '@/service/GnosisSafe';
+import { GnosisSafeService } from '@/service/contract/GnosisSafe';
 import { Address } from '@/types/Address';
 
 import { OnlineStatusContext } from './OnlineStatusProvider';

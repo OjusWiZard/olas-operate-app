@@ -19,7 +19,7 @@ import { useElectronApi } from '@/hooks/useElectronApi';
 import { usePageState } from '@/hooks/usePageState';
 import { useSetup } from '@/hooks/useSetup';
 import { useWallet } from '@/hooks/useWallet';
-import { AccountService } from '@/service/Account';
+import { AccountService } from '@/service/middleware/Account';
 
 import { FormFlex } from '../styled/FormFlex';
 

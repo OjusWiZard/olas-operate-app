@@ -5,7 +5,7 @@ import { useInterval } from 'usehooks-ts';
 
 import { useAddress } from '@/hooks/useAddress';
 import { usePageState } from '@/hooks/usePageState';
-import { getLatestTransaction } from '@/service/Ethers';
+import { getLatestTransaction } from '@/service/contract/Ethers';
 import { TransactionInfo } from '@/types/TransactionInfo';
 import { getTimeAgo } from '@/utils/time';
 

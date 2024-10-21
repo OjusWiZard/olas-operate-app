@@ -14,7 +14,7 @@ import { useInterval } from 'usehooks-ts';
 import { DeploymentStatus, Service } from '@/client';
 import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
-import { ServicesService } from '@/service/Services';
+import { ServicesService } from '@/service/middleware/Services';
 import { Address } from '@/types/Address';
 
 import { OnlineStatusContext } from './OnlineStatusProvider';

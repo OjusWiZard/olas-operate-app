@@ -11,7 +11,7 @@ import { useMasterSafe } from '@/hooks/useMasterSafe';
 import { usePageState } from '@/hooks/usePageState';
 import { useSetup } from '@/hooks/useSetup';
 import { useWallet } from '@/hooks/useWallet';
-import { WalletService } from '@/service/Wallet';
+import { WalletService } from '@/service/middleware/Wallet';
 import { delayInSeconds } from '@/utils/delay';
 
 export const SetupCreateSafe = () => {
