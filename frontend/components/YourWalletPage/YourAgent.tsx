@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Chain } from '@/client';
+import { MiddlewareChain } from '@/client';
 import { AddressLink } from '@/components/AddressLink';
-import { SERVICE_REGISTRY_L2_CONTRACT_ADDRESS } from '@/constants/contractAddresses';
+import { SERVICE_REGISTRY_L2_ADDRESSES } from '@/constants/contractAddresses';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { useAddress } from '@/hooks/useAddress';
 import { useBalance } from '@/hooks/useBalance';
@@ -38,7 +38,7 @@ const NftCard = styled(Card)`
 const ServiceAndNftDetails = () => {
   const { serviceId } = useServices();
   const serviceAddress =
-    SERVICE_REGISTRY_L2_CONTRACT_ADDRESS[`${Chain.GNOSIS}`];
+    SERVICE_REGISTRY_L2_ADDRESSES[`${MiddlewareChain.GNOSIS}`];
 
   return (
     <NftCard>

@@ -11,7 +11,7 @@ import {
 } from 'react';
 import { useInterval } from 'usehooks-ts';
 
-import { DeploymentStatus, Service } from '@/client';
+import { MiddlewareDeploymentStatus, MiddlewareService } from '@/client';
 import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
 import { ServicesService } from '@/service/Services';
@@ -20,11 +20,13 @@ import { Address } from '@/types/Address';
 import { OnlineStatusContext } from './OnlineStatusProvider';
 
 type ServicesContextProps = {
-  services?: Service[];
+  services?: MiddlewareService[];
   serviceAddresses?: Address[];
-  setServices: Dispatch<SetStateAction<Service[] | undefined>>;
-  serviceStatus: DeploymentStatus | undefined;
-  setServiceStatus: Dispatch<SetStateAction<DeploymentStatus | undefined>>;
+  setServices: Dispatch<SetStateAction<MiddlewareService[] | undefined>>;
+  serviceStatus: MiddlewareDeploymentStatus | undefined;
+  setServiceStatus: Dispatch<
+    SetStateAction<MiddlewareDeploymentStatus | undefined>
+  >;
   updateServicesState: () => Promise<void>;
   updateServiceStatus: () => Promise<void>;
   hasInitialLoaded: boolean;
@@ -48,17 +50,17 @@ export const ServicesContext = createContext<ServicesContextProps>({
 export const ServicesProvider = ({ children }: PropsWithChildren) => {
   const { isOnline } = useContext(OnlineStatusContext);
 
-  const [services, setServices] = useState<Service[]>();
+  const [services, setServices] = useState<MiddlewareService[]>();
 
   const [serviceStatus, setServiceStatus] = useState<
-    DeploymentStatus | undefined
+    MiddlewareDeploymentStatus | undefined
   >();
   const [hasInitialLoaded, setHasInitialLoaded] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
   const serviceAddresses = useMemo(
     () =>
-      services?.reduce<Address[]>((acc, service: Service) => {
+      services?.reduce<Address[]>((acc, service: MiddlewareService) => {
         const instances =
           service.chain_configs[CHAINS.GNOSIS.chainId].chain_data.instances;
         if (instances) {
@@ -78,7 +80,7 @@ export const ServicesProvider = ({ children }: PropsWithChildren) => {
   const updateServicesState = useCallback(
     async (): Promise<void> =>
       ServicesService.getServices()
-        .then((data: Service[]) => {
+        .then((data: MiddlewareService[]) => {
           if (!Array.isArray(data)) return;
           setServices(data);
           setHasInitialLoaded(true);

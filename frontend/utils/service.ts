@@ -1,9 +1,9 @@
-import { ServiceTemplate } from '@/client';
+import { MiddlewareServiceTemplate } from '@/client';
 import { StakingProgramId } from '@/enums/StakingProgram';
 
 /** TODO: update from hardcoded, workaround for quick release */
 export const getMinimumStakedAmountRequired = (
-  serviceTemplate?: ServiceTemplate, //TODO: remove, as unused
+  serviceTemplate?: MiddlewareServiceTemplate, //TODO: remove, as unused
   stakingProgramId: StakingProgramId = StakingProgramId.Beta,
 ): number | undefined => {
   if (stakingProgramId === StakingProgramId.Alpha) {

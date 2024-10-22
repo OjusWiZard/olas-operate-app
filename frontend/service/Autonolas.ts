@@ -7,13 +7,13 @@ import { MECH_ACTIVITY_CHECKER_ABI } from '@/abis/mechActivityChecker';
 import { SERVICE_REGISTRY_L2_ABI } from '@/abis/serviceRegistryL2';
 import { SERVICE_REGISTRY_TOKEN_UTILITY_ABI } from '@/abis/serviceRegistryTokenUtility';
 import { SERVICE_STAKING_TOKEN_MECH_USAGE_ABI } from '@/abis/serviceStakingTokenMechUsage';
-import { Chain } from '@/client';
+import { MiddlewareChain } from '@/client';
 import {
-  AGENT_MECH_CONTRACT_ADDRESS,
-  MECH_ACTIVITY_CHECKER_CONTRACT_ADDRESS,
-  SERVICE_REGISTRY_L2_CONTRACT_ADDRESS,
-  SERVICE_REGISTRY_TOKEN_UTILITY_CONTRACT_ADDRESS,
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES,
+  AGENT_MECH_ADDRESSES,
+  MECH_ACTIVITY_CHECKER_ADDRESSES,
+  SERVICE_REGISTRY_L2_ADDRESSES,
+  SERVICE_REGISTRY_TOKEN_UTILITY_ADDRESSES,
+  STAKING_PROXY_ADDRESSES,
 } from '@/constants/contractAddresses';
 import { gnosisMulticallProvider } from '@/constants/providers';
 import { ServiceRegistryL2ServiceState } from '@/enums/ServiceRegistryL2ServiceState';
@@ -25,7 +25,7 @@ const ONE_YEAR = 1 * 24 * 60 * 60 * 365;
 const REQUIRED_MECH_REQUESTS_SAFETY_MARGIN = 1;
 
 const agentMechContract = new MulticallContract(
-  AGENT_MECH_CONTRACT_ADDRESS[Chain.GNOSIS],
+  AGENT_MECH_ADDRESSES[MiddlewareChain.GNOSIS],
   AGENT_MECH_ABI.filter((abi) => abi.type === 'function'), // weird bug in the package where their filter doesn't work..
 );
 
@@ -38,37 +38,31 @@ const serviceStakingTokenMechUsageContracts: Record<
   MulticallContract
 > = {
   [StakingProgramId.Alpha]: new MulticallContract(
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
-      StakingProgramId.Alpha
-    ],
+    STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS][StakingProgramId.Alpha],
     ServiceStakingTokenAbi,
   ),
   [StakingProgramId.Beta]: new MulticallContract(
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
-      StakingProgramId.Beta
-    ],
+    STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS][StakingProgramId.Beta],
     ServiceStakingTokenAbi,
   ),
   [StakingProgramId.Beta2]: new MulticallContract(
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
-      StakingProgramId.Beta2
-    ],
+    STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS][StakingProgramId.Beta2],
     ServiceStakingTokenAbi,
   ),
 };
 
 const serviceRegistryTokenUtilityContract = new MulticallContract(
-  SERVICE_REGISTRY_TOKEN_UTILITY_CONTRACT_ADDRESS[Chain.GNOSIS],
+  SERVICE_REGISTRY_TOKEN_UTILITY_ADDRESSES[MiddlewareChain.GNOSIS],
   SERVICE_REGISTRY_TOKEN_UTILITY_ABI.filter((abi) => abi.type === 'function'), // same as above
 );
 
 const serviceRegistryL2Contract = new MulticallContract(
-  SERVICE_REGISTRY_L2_CONTRACT_ADDRESS[Chain.GNOSIS],
+  SERVICE_REGISTRY_L2_ADDRESSES[MiddlewareChain.GNOSIS],
   SERVICE_REGISTRY_L2_ABI.filter((abi) => abi.type === 'function'), // same as above
 );
 
 const mechActivityCheckerContract = new MulticallContract(
-  MECH_ACTIVITY_CHECKER_CONTRACT_ADDRESS[Chain.GNOSIS],
+  MECH_ACTIVITY_CHECKER_ADDRESSES[MiddlewareChain.GNOSIS],
   MECH_ACTIVITY_CHECKER_ABI.filter((abi) => abi.type === 'function'), // same as above
 );
 

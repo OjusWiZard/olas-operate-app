@@ -1,4 +1,9 @@
-import { Deployment, Service, ServiceHash, ServiceTemplate } from '@/client';
+import {
+  MiddlewareDeployment,
+  MiddlewareService,
+  MiddlewareServiceTemplate,
+  ServiceHash,
+} from '@/client';
 import { CONTENT_TYPE_JSON_UTF8 } from '@/constants/headers';
 import { BACKEND_URL } from '@/constants/urls';
 import { StakingProgramId } from '@/enums/StakingProgram';
@@ -8,7 +13,9 @@ import { StakingProgramId } from '@/enums/StakingProgram';
  * @param serviceHash
  * @returns
  */
-const getService = async (serviceHash: ServiceHash): Promise<Service> =>
+const getService = async (
+  serviceHash: ServiceHash,
+): Promise<MiddlewareService> =>
   fetch(`${BACKEND_URL}/services/${serviceHash}`, {
     method: 'GET',
     headers: {
@@ -25,7 +32,7 @@ const getService = async (serviceHash: ServiceHash): Promise<Service> =>
  * Gets an array of services from the backend
  * @returns An array of services
  */
-const getServices = async (): Promise<Service[]> =>
+const getServices = async (): Promise<MiddlewareService[]> =>
   fetch(`${BACKEND_URL}/services`, {
     method: 'GET',
     headers: {
@@ -49,9 +56,9 @@ const createService = async ({
   stakingProgramId,
 }: {
   deploy: boolean;
-  serviceTemplate: ServiceTemplate;
+  serviceTemplate: MiddlewareServiceTemplate;
   stakingProgramId: StakingProgramId;
-}): Promise<Service> =>
+}): Promise<MiddlewareService> =>
   new Promise((resolve, reject) =>
     fetch(`${BACKEND_URL}/services`, {
       method: 'POST',
@@ -77,7 +84,9 @@ const createService = async ({
     }),
   );
 
-const deployOnChain = async (serviceHash: ServiceHash): Promise<Deployment> =>
+const deployOnChain = async (
+  serviceHash: ServiceHash,
+): Promise<MiddlewareDeployment> =>
   fetch(`${BACKEND_URL}/services/${serviceHash}/onchain/deploy`, {
     method: 'POST',
     headers: {
@@ -90,7 +99,9 @@ const deployOnChain = async (serviceHash: ServiceHash): Promise<Deployment> =>
     throw new Error('Failed to deploy service on chain');
   });
 
-const stopOnChain = async (serviceHash: ServiceHash): Promise<Deployment> =>
+const stopOnChain = async (
+  serviceHash: ServiceHash,
+): Promise<MiddlewareDeployment> =>
   fetch(`${BACKEND_URL}/services/${serviceHash}/onchain/stop`, {
     method: 'POST',
     headers: {
@@ -103,7 +114,9 @@ const stopOnChain = async (serviceHash: ServiceHash): Promise<Deployment> =>
     throw new Error('Failed to stop service on chain');
   });
 
-const buildDeployment = async (serviceHash: ServiceHash): Promise<Deployment> =>
+const buildDeployment = async (
+  serviceHash: ServiceHash,
+): Promise<MiddlewareDeployment> =>
   fetch(`${BACKEND_URL}/services/${serviceHash}/deployment/build`, {
     method: 'POST',
     headers: {
@@ -116,7 +129,9 @@ const buildDeployment = async (serviceHash: ServiceHash): Promise<Deployment> =>
     throw new Error('Failed to build deployment');
   });
 
-const startDeployment = async (serviceHash: ServiceHash): Promise<Deployment> =>
+const startDeployment = async (
+  serviceHash: ServiceHash,
+): Promise<MiddlewareDeployment> =>
   fetch(`${BACKEND_URL}/services/${serviceHash}/deployment/start`, {
     method: 'POST',
     headers: {
@@ -129,7 +144,9 @@ const startDeployment = async (serviceHash: ServiceHash): Promise<Deployment> =>
     throw new Error('Failed to start deployment');
   });
 
-const stopDeployment = async (serviceHash: ServiceHash): Promise<Deployment> =>
+const stopDeployment = async (
+  serviceHash: ServiceHash,
+): Promise<MiddlewareDeployment> =>
   fetch(`${BACKEND_URL}/services/${serviceHash}/deployment/stop`, {
     method: 'POST',
     headers: {
@@ -144,7 +161,7 @@ const stopDeployment = async (serviceHash: ServiceHash): Promise<Deployment> =>
 
 const deleteDeployment = async (
   serviceHash: ServiceHash,
-): Promise<Deployment> =>
+): Promise<MiddlewareDeployment> =>
   fetch(`${BACKEND_URL}/services/${serviceHash}/deployment/delete`, {
     method: 'POST',
     headers: {
@@ -157,7 +174,9 @@ const deleteDeployment = async (
     throw new Error('Failed to delete deployment');
   });
 
-const getDeployment = async (serviceHash: ServiceHash): Promise<Deployment> =>
+const getDeployment = async (
+  serviceHash: ServiceHash,
+): Promise<MiddlewareDeployment> =>
   fetch(`${BACKEND_URL}/services/${serviceHash}/deployment`, {
     method: 'GET',
     headers: {

@@ -4,8 +4,8 @@ import { gql, request } from 'graphql-request';
 import { groupBy } from 'lodash';
 import { z } from 'zod';
 
-import { Chain } from '@/client';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contractAddresses';
+import { MiddlewareChain } from '@/client';
+import { STAKING_PROXY_ADDRESSES } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { useServices } from '@/hooks/useServices';
@@ -24,11 +24,8 @@ const RewardHistoryResponseSchema = z.object({
 });
 type RewardHistoryResponse = z.infer<typeof RewardHistoryResponseSchema>;
 
-const betaAddress =
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS].pearl_beta;
-const beta2Address =
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS]
-    .pearl_beta_2;
+const betaAddress = STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta;
+const beta2Address = STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta_2;
 
 const SUBGRAPH_URL =
   'https://api.studio.thegraph.com/query/81855/pearl-staking-rewards-history/version/latest';

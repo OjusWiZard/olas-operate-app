@@ -1,23 +1,27 @@
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { Address } from '@/types/Address';
 
-import { Chain, DeploymentStatus, Ledger } from './enums';
+import {
+  MiddlewareChain,
+  MiddlewareDeploymentStatus,
+  MiddlewareLedger,
+} from './enums';
 
 export type ServiceHash = string;
 
-export type LedgerConfig = {
+export type MiddlewareLedgerConfig = {
   rpc: string;
-  type: Ledger;
-  chain: Chain;
+  type: MiddlewareLedger;
+  chain: MiddlewareChain;
 };
 
-export type ServiceKeys = {
+export type MiddlewareServiceKeys = {
   address: Address;
   private_key: string;
-  ledger: Chain;
+  ledger: MiddlewareChain;
 };
 
-export type ChainData = {
+export type MiddlewareChainData = {
   instances?: Address[];
   token?: number;
   multisig?: Address;
@@ -36,31 +40,31 @@ export type ChainData = {
   };
 };
 
-export type Service = {
+export type MiddlewareService = {
   name: string;
   hash: string;
-  keys: ServiceKeys[];
+  keys: MiddlewareServiceKeys[];
   readme?: string;
   chain_configs: {
     [chainId: number]: {
-      ledger_config: LedgerConfig;
-      chain_data: ChainData;
+      ledger_config: MiddlewareLedgerConfig;
+      chain_data: MiddlewareChainData;
     };
   };
 };
 
-export type ServiceTemplate = {
+export type MiddlewareServiceTemplate = {
   name: string;
   hash: string;
   image: string;
   description: string;
   service_version: string;
   home_chain_id: string;
-  configurations: { [key: string]: ConfigurationTemplate };
+  configurations: { [key: string]: MiddlewareConfigurationTemplate };
   deploy?: boolean;
 };
 
-export type ConfigurationTemplate = {
+export type MiddlewareConfigurationTemplate = {
   rpc?: string; // added on deployment
   staking_program_id?: StakingProgramId; // added on deployment
   nft: string;
@@ -69,22 +73,22 @@ export type ConfigurationTemplate = {
   use_staking: boolean;
   cost_of_bond: number;
   monthly_gas_estimate: number;
-  fund_requirements: FundRequirementsTemplate;
+  fund_requirements: MiddlewareFundRequirementsTemplate;
 };
 
-export type FundRequirementsTemplate = {
+export type MiddlewareFundRequirementsTemplate = {
   agent: number;
   safe: number;
 };
 
-export type DeployedNodes = {
+export type MiddlewareDeployedNodes = {
   agent: string[];
   tendermint: string[];
 };
 
-export type Deployment = {
-  status: DeploymentStatus;
-  nodes: DeployedNodes;
+export type MiddlewareDeployment = {
+  status: MiddlewareDeploymentStatus;
+  nodes: MiddlewareDeployedNodes;
 };
 
 export type EmptyPayload = Record<string, never>;
@@ -101,38 +105,38 @@ export type ClientResponse<ResponseType> = {
   data?: ResponseType;
 };
 
-export type StopDeployment = {
+export type MiddlewareStopDeployment = {
   delete: boolean /* Delete deployment*/;
 };
 
-export type UpdateServicePayload = {
+export type MiddlewareUpdateServicePayload = {
   old: ServiceHash;
-  new: ServiceTemplate;
+  new: MiddlewareServiceTemplate;
 };
 
-export type DeleteServicesPayload = {
+export type MiddlewareDeleteServicesPayload = {
   hashes: ServiceHash[];
 };
 
-export type DeleteServicesResponse = {
+export type MiddlewareDeleteServicesResponse = {
   hashes: ServiceHash[];
 };
 
-export type AppInfo = {
+export type MiddlewareAppInfo = {
   account?: {
     key: Address;
   };
 };
 
-export type WalletResponse = {
+export type MiddlewareWalletResponse = {
   address: Address;
-  safe_chains: Chain[];
-  ledger_type: Ledger;
+  safe_chains: MiddlewareChain[];
+  ledger_type: MiddlewareLedger;
   safe: Address;
   safe_nonce: number;
 };
 
-export type Wallet = WalletResponse & {
+export type Wallet = MiddlewareWalletResponse & {
   ethBalance?: number;
   olasBalance?: number;
 };

@@ -5,8 +5,8 @@ import { groupBy } from 'lodash';
 import { useEffect, useMemo } from 'react';
 import { z } from 'zod';
 
-import { Chain } from '@/client';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contractAddresses';
+import { MiddlewareChain } from '@/client';
+import { STAKING_PROXY_ADDRESSES } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
 import { SUBGRAPH_URL } from '@/constants/urls';
 import { StakingProgramId } from '@/enums/StakingProgram';
@@ -42,9 +42,9 @@ const CheckpointGraphResponseSchema = z.object({
 type CheckpointGraphResponse = z.infer<typeof CheckpointGraphResponseSchema>;
 
 const betaAddress =
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS].pearl_beta;
+  STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta;
 const beta2Address =
-  SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS]
+  STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS]
     .pearl_beta_2;
 
 const fetchRewardsQuery = gql`

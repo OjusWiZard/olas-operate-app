@@ -1,9 +1,9 @@
-import { ServiceTemplate } from '@/client/types';
+import { MiddlewareServiceTemplate } from '@/client/types';
 import { SERVICE_TEMPLATES } from '@/constants/serviceTemplates';
 
 export const useServiceTemplates = () => {
-  const getServiceTemplates = (): ServiceTemplate[] => SERVICE_TEMPLATES;
-  const getServiceTemplate = (hash: string): ServiceTemplate | undefined =>
+  const getServiceTemplates = (): MiddlewareServiceTemplate[] => SERVICE_TEMPLATES;
+  const getServiceTemplate = (hash: string): MiddlewareServiceTemplate | undefined =>
     SERVICE_TEMPLATES.find((template) => template.hash === hash);
 
   return {

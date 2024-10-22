@@ -1,7 +1,7 @@
-import { ServiceTemplate } from '@/client';
+import { MiddlewareServiceTemplate } from '@/client';
 import { StakingProgramId } from '@/enums/StakingProgram';
 
-export const SERVICE_TEMPLATES: ServiceTemplate[] = [
+export const SERVICE_TEMPLATES: MiddlewareServiceTemplate[] = [
   {
     name: 'Trader Agent',
     hash: 'bafybeicbfnqfc3potbfmvrmssaxepwilipe5myjbg4xh7ix2sdll4kyc6m',

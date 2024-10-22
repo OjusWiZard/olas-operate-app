@@ -1,7 +1,7 @@
 import { isNil } from 'lodash';
 import { useMemo } from 'react';
 
-import { DeploymentStatus } from '@/client';
+import { MiddlewareDeploymentStatus } from '@/client';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { useBalance } from '@/hooks/useBalance';
 import { useServices } from '@/hooks/useServices';
@@ -112,9 +112,9 @@ export const useMigrate = (stakingProgramId: StakingProgramId) => {
     // Services must be not be running or in a transitional state
     if (
       [
-        DeploymentStatus.DEPLOYED,
-        DeploymentStatus.DEPLOYING,
-        DeploymentStatus.STOPPING,
+        MiddlewareDeploymentStatus.DEPLOYED,
+        MiddlewareDeploymentStatus.DEPLOYING,
+        MiddlewareDeploymentStatus.STOPPING,
       ].some((status) => status === serviceStatus)
     ) {
       return {

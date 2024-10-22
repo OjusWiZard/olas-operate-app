@@ -2,7 +2,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, ButtonProps, Flex, Popover, Tooltip, Typography } from 'antd';
 import { useCallback, useMemo } from 'react';
 
-import { Chain, DeploymentStatus } from '@/client';
+import { MiddlewareChain, MiddlewareDeploymentStatus } from '@/client';
 import { COLOR } from '@/constants/colors';
 import { useBalance } from '@/hooks/useBalance';
 import { useElectronApi } from '@/hooks/useElectronApi';
@@ -83,7 +83,7 @@ const AgentRunningButton = () => {
     setIsServicePollingPaused(true);
 
     // Optimistically update service status
-    setServiceStatus(DeploymentStatus.STOPPING);
+    setServiceStatus(MiddlewareDeploymentStatus.STOPPING);
     try {
       await ServicesService.stopDeployment(service.hash);
     } catch (error) {
@@ -177,12 +177,12 @@ const AgentNotRunningButton = () => {
     setIsStakingContractInfoPollingPaused(true);
 
     // Mock "DEPLOYING" status (service polling will update this once resumed)
-    setServiceStatus(DeploymentStatus.DEPLOYING);
+    setServiceStatus(MiddlewareDeploymentStatus.DEPLOYING);
 
     // Create master safe if it doesn't exist
     try {
       if (!masterSafeAddress) {
-        await WalletService.createSafe(Chain.GNOSIS);
+        await WalletService.createSafe(MiddlewareChain.GNOSIS);
       }
     } catch (error) {
       console.error(error);
@@ -220,7 +220,7 @@ const AgentNotRunningButton = () => {
     }
 
     // Can assume successful deployment
-    setServiceStatus(DeploymentStatus.DEPLOYED);
+    setServiceStatus(MiddlewareDeploymentStatus.DEPLOYED);
 
     // TODO: remove this workaround, middleware should respond when agent is staked & confirmed running after `createService` call
     await delayInSeconds(5);
@@ -259,15 +259,15 @@ const AgentNotRunningButton = () => {
     // if the agent is NOT running and the balance is too low,
     // user should not be able to start the agent
     const isServiceInactive =
-      serviceStatus === DeploymentStatus.BUILT ||
-      serviceStatus === DeploymentStatus.STOPPED;
+      serviceStatus === MiddlewareDeploymentStatus.BUILT ||
+      serviceStatus === MiddlewareDeploymentStatus.STOPPED;
     if (isServiceInactive && isLowBalance) {
       return false;
     }
 
-    if (serviceStatus === DeploymentStatus.DEPLOYED) return false;
-    if (serviceStatus === DeploymentStatus.DEPLOYING) return false;
-    if (serviceStatus === DeploymentStatus.STOPPING) return false;
+    if (serviceStatus === MiddlewareDeploymentStatus.DEPLOYED) return false;
+    if (serviceStatus === MiddlewareDeploymentStatus.DEPLOYING) return false;
+    if (serviceStatus === MiddlewareDeploymentStatus.STOPPING) return false;
 
     if (!requiredOlas) return false;
 
@@ -318,15 +318,15 @@ export const AgentButton = () => {
       return <Button type="primary" size="large" disabled loading />;
     }
 
-    if (serviceStatus === DeploymentStatus.STOPPING) {
+    if (serviceStatus === MiddlewareDeploymentStatus.STOPPING) {
       return <AgentStoppingButton />;
     }
 
-    if (serviceStatus === DeploymentStatus.DEPLOYING) {
+    if (serviceStatus === MiddlewareDeploymentStatus.DEPLOYING) {
       return <AgentStartingButton />;
     }
 
-    if (serviceStatus === DeploymentStatus.DEPLOYED) {
+    if (serviceStatus === MiddlewareDeploymentStatus.DEPLOYED) {
       return <AgentRunningButton />;
     }
 
@@ -335,10 +335,10 @@ export const AgentButton = () => {
 
     if (
       !service ||
-      serviceStatus === DeploymentStatus.STOPPED ||
-      serviceStatus === DeploymentStatus.CREATED ||
-      serviceStatus === DeploymentStatus.BUILT ||
-      serviceStatus === DeploymentStatus.DELETED
+      serviceStatus === MiddlewareDeploymentStatus.STOPPED ||
+      serviceStatus === MiddlewareDeploymentStatus.CREATED ||
+      serviceStatus === MiddlewareDeploymentStatus.BUILT ||
+      serviceStatus === MiddlewareDeploymentStatus.DELETED
     ) {
       return <AgentNotRunningButton />;
     }
