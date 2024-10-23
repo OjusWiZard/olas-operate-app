@@ -68,7 +68,7 @@ const predict_pearlBeta = new StakingProgram({
   stakingProgramId: StakingProgramId.Beta,
   canMigrateTo: [StakingProgramId.Beta2, StakingProgramId.MechMarketplace],
   mechType: MechType.STANDARD,
-  supportedAgents: [AgentType.PredictTrader],
+  supportedAgentTypes: [AgentType.PredictTrader],
 });
 
 const predict_pearlBeta2 = new StakingProgram({
@@ -76,7 +76,7 @@ const predict_pearlBeta2 = new StakingProgram({
   stakingProgramId: StakingProgramId.Beta2,
   canMigrateTo: [StakingProgramId.Beta, StakingProgramId.MechMarketplace],
   mechType: MechType.STANDARD,
-  supportedAgents: [AgentType.PredictTrader],
+  supportedAgentTypes: [AgentType.PredictTrader],
 });
 
 const predict_pearlAlpha = new StakingProgram({
@@ -88,7 +88,7 @@ const predict_pearlAlpha = new StakingProgram({
     StakingProgramId.MechMarketplace,
   ],
   mechType: MechType.STANDARD,
-  supportedAgents: [AgentType.PredictTrader],
+  supportedAgentTypes: [AgentType.PredictTrader],
 });
 
 const predict_pearlMechMarketplace = new StakingProgram({
@@ -100,7 +100,7 @@ const predict_pearlMechMarketplace = new StakingProgram({
     StakingProgramId.MechMarketplace,
   ],
   mechType: MechType.MARKETPLACE,
-  supportedAgents: [AgentType.PredictTrader],
+  supportedAgentTypes: [AgentType.PredictTrader],
 });
 
 export const stakingPrograms: {
