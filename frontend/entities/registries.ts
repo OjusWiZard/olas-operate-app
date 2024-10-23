@@ -1,4 +1,4 @@
-import { ChainId } from '@/constants/chains';
+import { ChainId } from '@/enums/ChainId';
 import { Registry } from '@/models/Registry';
 
 export const REGISTRIES: {

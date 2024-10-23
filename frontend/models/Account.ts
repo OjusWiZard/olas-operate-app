@@ -1,4 +1,4 @@
-import { ChainId } from '@/constants/chains';
+import { ChainId } from '@/enums/ChainId';
 import { Address } from '@/types/Address';
 
 export abstract class Account {

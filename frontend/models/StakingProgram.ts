@@ -1,10 +1,10 @@
 import { ethers } from 'ethers';
 
-import { ChainId } from '@/constants/chains';
 import { STAKING_PROXY_ADDRESSES } from '@/constants/contractAddresses';
 import { MECHS } from '@/entities/mechs';
 import { REGISTRIES } from '@/entities/registries';
 import { AgentType } from '@/enums/AgentType';
+import { ChainId } from '@/enums/ChainId';
 import { MechType } from '@/enums/MechType';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { Address } from '@/types/Address';
@@ -25,13 +25,13 @@ export class StakingProgram {
   constructor({
     chainId,
     stakingProgramId,
-    supportedAgents,
+    supportedAgentTypes,
     mechType,
     canMigrateTo,
   }: {
     chainId: ChainId;
     stakingProgramId: StakingProgramId;
-    supportedAgents: AgentType[];
+    supportedAgentTypes: AgentType[];
     mechType: MechType;
     canMigrateTo: StakingProgramId[];
   }) {
@@ -39,7 +39,7 @@ export class StakingProgram {
     this.stakingProgramId = stakingProgramId;
     this.stakingProxyAddress =
       STAKING_PROXY_ADDRESSES[chainId][stakingProgramId];
-    this.supportedAgents = supportedAgents;
+    this.supportedAgents = supportedAgentTypes;
     this.mech = MECHS[chainId][mechType];
     this.registry = REGISTRIES[chainId];
     this.canMigrateTo = canMigrateTo;

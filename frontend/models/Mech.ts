@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 
 import { AGENT_MECH_ABI } from '@/abis/agentMech';
-import { ChainId } from '@/constants/chains';
+import { ChainId } from '@/enums/ChainId';
 import { Address } from '@/types/Address';
 
 export abstract class Mech {
