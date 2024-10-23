@@ -14,6 +14,7 @@ import { useInterval } from 'usehooks-ts';
 import { MiddlewareDeploymentStatus, MiddlewareService } from '@/client';
 import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
+import { Service } from '@/models/Service';
 import { ServicesService } from '@/service/Services';
 import { Address } from '@/types/Address';
 
@@ -50,11 +51,12 @@ export const ServicesContext = createContext<ServicesContextProps>({
 export const ServicesProvider = ({ children }: PropsWithChildren) => {
   const { isOnline } = useContext(OnlineStatusContext);
 
-  const [services, setServices] = useState<MiddlewareService[]>();
+  const [services, setServices] = useState<Service[]>();
 
   const [serviceStatus, setServiceStatus] = useState<
     MiddlewareDeploymentStatus | undefined
   >();
+
   const [hasInitialLoaded, setHasInitialLoaded] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -82,6 +84,9 @@ export const ServicesProvider = ({ children }: PropsWithChildren) => {
       ServicesService.getServices()
         .then((data: MiddlewareService[]) => {
           if (!Array.isArray(data)) return;
+          const services = data.map(
+            (service) => new Service({ middlewareService: service }),
+          );
           setServices(data);
           setHasInitialLoaded(true);
         })
