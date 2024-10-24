@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
     "allowJs": true,
+    "baseUrl": ".",
     "esModuleInterop": true,
     "incremental": true,
     "isolatedModules": true,
@@ -22,17 +22,19 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
+    "target": "ES2015",
     "types": [
-      "@testing-library/jest-dom"
+      "@testing-library/jest-dom",
+      "node"
     ]
   },
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "./**/*.ts",
+    "./**/*.tsx",
     "next-env.d.ts",
-    "**/*.d.ts"
+    "./**/*.d.ts",
   ]
 }

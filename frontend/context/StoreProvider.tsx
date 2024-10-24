@@ -9,14 +9,14 @@ import {
 
 import type { ElectronStore } from '@/types/ElectronApi';
 
-import { ElectronApiContext } from './ElectronApiProvider';
+import { useElectronApi } from '@/hooks/useElectronApi';
 
 export const StoreContext = createContext<{ storeState?: ElectronStore }>({
   storeState: undefined,
 });
 
 export const StoreProvider = ({ children }: PropsWithChildren) => {
-  const { store, ipcRenderer } = useContext(ElectronApiContext);
+  const { store, ipcRenderer } = useElectronApi();
   const [storeState, setStoreState] = useState<ElectronStore>();
 
   const setupStore = useCallback(async () => {
