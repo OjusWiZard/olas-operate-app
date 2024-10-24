@@ -6,7 +6,7 @@ import {
 } from '@/client';
 import { CONTENT_TYPE_JSON_UTF8 } from '@/constants/headers';
 import { BACKEND_URL } from '@/constants/urls';
-import { StakingProgramId } from '@/enums/StakingProgramId';
+import type { StakingProgramId } from '@/types/StakingProgram';
 
 /**
  * Get a single service from the backend

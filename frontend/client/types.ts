@@ -50,7 +50,8 @@ export type MiddlewareService = {
   hash: string;
   keys: MiddlewareServiceKeys[];
   name: string;
-  readme?: string;
+  // readme?: string;
+  status?: MiddlewareDeploymentStatus;
 };
 
 export type MiddlewareServiceTemplate = {

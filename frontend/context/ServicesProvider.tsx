@@ -11,9 +11,9 @@ import {
 import { useInterval } from 'usehooks-ts';
 
 import {
+  MiddlewareDeployment,
   MiddlewareDeploymentStatus,
   MiddlewareService,
-  ServiceHash,
 } from '@/client';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
 import { ServicesService } from '@/service/Services';
@@ -52,27 +52,53 @@ export const ServicesProvider = ({ children }: PropsWithChildren) => {
 
   const [services, setServices] = useState<MiddlewareService[]>();
 
-  const [serviceStatuses, setServiceStatuses] = useState<
-    Record<ServiceHash, MiddlewareDeploymentStatus>
-  >({});
-
   const [hasInitialLoaded, setHasInitialLoaded] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  const updateServices = useCallback(
-    async (): Promise<void> =>
-      ServicesService.getServices()
-        .then((data: MiddlewareService[]) => {
-          if (!Array.isArray(data)) return;
-          setServices(data);
-          setHasInitialLoaded(true);
-        })
-        .catch((e) => {
-          console.error(e);
-          // message.error(e.message); Commented out to avoid showing error message; need to handle "isAuthenticated" in a better way
-        }),
-    [],
-  );
+  const updateServices = useCallback(async (): Promise<void> => {
+    // get all services
+    const middlewareServices = await ServicesService.getServices();
+
+    if (!middlewareServices) {
+      setServices([]);
+      setHasInitialLoaded(true);
+      return;
+    }
+
+    // get all statuses
+    const middlewareDeployments = await Promise.allSettled(
+      middlewareServices.map(({ hash }) => ServicesService.getDeployment(hash)),
+    );
+
+    // check lengths match
+    if (middlewareServices.length !== middlewareDeployments.length) {
+      throw new Error(
+        'ServicesProvider: Mismatched number of services to deployments',
+      );
+    }
+
+    const services = middlewareServices.reduce(
+      (acc: MiddlewareService[], middlewareService, index) => {
+        // Find the deployment result for the current service by matching reduce index
+        const middlewareDeploymentSettledResult: PromiseSettledResult<MiddlewareDeployment> =
+          middlewareDeployments[index];
+
+        // getDeployment promise failed, don't append status
+        if (middlewareDeploymentSettledResult.status === 'rejected') {
+          return [...acc, middlewareService];
+        }
+
+        // getDeployment promise succeeded, return with status
+        const deployment: MiddlewareDeployment =
+          middlewareDeploymentSettledResult.value;
+        return [...acc, { ...middlewareService, status: deployment.status }];
+      },
+      [],
+    );
+
+    setServices(services);
+    setHasInitialLoaded(true);
+  });
 
   // @todo: update once we have multiple services
   const updateServiceStatuses = useCallback(async () => {

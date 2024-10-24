@@ -122,9 +122,9 @@ const AgentRunningButton = () => {
 const AgentNotRunningButton = () => {
   const { wallets, masterSafeAddress } = useWallet();
   const {
-    service,
-    serviceStatus,
-    setServiceStatus,
+    services,
+    serviceStatuses,
+    setServiceStatuses,
     setIsServicePollingPaused,
     updateServicesState,
   } = useServices();
@@ -177,7 +177,7 @@ const AgentNotRunningButton = () => {
     setIsStakingContractInfoPollingPaused(true);
 
     // Mock "DEPLOYING" status (service polling will update this once resumed)
-    setServiceStatus(MiddlewareDeploymentStatus.DEPLOYING);
+    setServiceStatuses(MiddlewareDeploymentStatus.DEPLOYING);
 
     // Create master safe if it doesn't exist
     try {

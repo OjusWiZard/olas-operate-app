@@ -1,11 +1,15 @@
+import type { MiddlewareDeploymentStatus } from '@/client';
 import { AgentType } from '@/enums/AgentType';
 import {
   OptimusStakingProgramId,
   PredictStakingProgramId,
 } from '@/enums/StakingProgramId';
 
-type Agent = {
-  agentType: AgentType;
+import type { Service } from './Service';
+
+type Agent = Service & {
+  deploymentStatus: MiddlewareDeploymentStatus;
+  serviceNftTokenId: number;
 };
 
 export type PredictTraderAgent = Agent & {
@@ -17,3 +21,5 @@ export type OptimusTraderAgent = Agent & {
   readonly agentType: AgentType.Optimus;
   stakingProgramId: OptimusStakingProgramId;
 };
+
+export type AgentInstance = PredictTraderAgent | OptimusTraderAgent;
