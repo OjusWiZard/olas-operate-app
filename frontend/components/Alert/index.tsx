@@ -18,7 +18,7 @@ export const CustomAlert = ({
   type,
   fullWidth,
   ...rest
-}: { type: AlertType; fullWidth?: boolean } & Omit<AlertProps, 'type'>) => (
+}: { fullWidth?: boolean; type: AlertType } & Omit<AlertProps, 'type'>) => (
   <AlertAntd
     type={type === 'primary' ? undefined : type}
     className={`custom-alert custom-alert--${type} ${fullWidth ? 'custom-alert--full-width' : ''}`}

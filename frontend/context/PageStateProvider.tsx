@@ -12,9 +12,9 @@ import { Pages } from '@/enums/PageState';
 const LAST_TRANSACTION_SHOW_DELAY = 60 * 1000;
 
 type PageStateContextType = {
+  isPageLoadedAndOneMinutePassed: boolean;
   pageState: Pages;
   setPageState: Dispatch<SetStateAction<Pages>>;
-  isPageLoadedAndOneMinutePassed: boolean;
 };
 
 export const PageStateContext = createContext<PageStateContextType>({

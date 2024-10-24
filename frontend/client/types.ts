@@ -1,4 +1,4 @@
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { Address } from '@/types/Address';
 
 import {
@@ -10,23 +10,23 @@ import {
 export type ServiceHash = string;
 
 export type MiddlewareLedgerConfig = {
+  chain: MiddlewareChain;
   rpc: string;
   type: MiddlewareLedger;
-  chain: MiddlewareChain;
 };
 
 export type MiddlewareServiceKeys = {
   address: Address;
-  private_key: string;
   ledger: MiddlewareChain;
+  private_key: string;
 };
 
 export type MiddlewareChainData = {
   instances?: Address[];
-  token?: number;
   multisig?: Address;
   on_chain_state: number;
   staked: boolean;
+  token?: number;
   user_params: {
     cost_of_bond: number;
     fund_requirements: {
@@ -41,39 +41,41 @@ export type MiddlewareChainData = {
 };
 
 export type MiddlewareService = {
-  name: string;
-  hash: string;
-  keys: MiddlewareServiceKeys[];
-  readme?: string;
   chain_configs: {
     [chainId: number]: {
-      ledger_config: MiddlewareLedgerConfig;
       chain_data: MiddlewareChainData;
+      ledger_config: MiddlewareLedgerConfig;
     };
   };
+  hash: string;
+  keys: MiddlewareServiceKeys[];
+  name: string;
+  readme?: string;
 };
 
 export type MiddlewareServiceTemplate = {
-  name: string;
-  hash: string;
-  image: string;
-  description: string;
-  service_version: string;
-  home_chain_id: string;
   configurations: { [key: string]: MiddlewareConfigurationTemplate };
   deploy?: boolean;
+  description: string;
+  hash: string;
+  home_chain_id: string;
+  image: string;
+  name: string;
+  service_version: string;
 };
 
 export type MiddlewareConfigurationTemplate = {
-  rpc?: string; // added on deployment
-  staking_program_id?: StakingProgramId; // added on deployment
-  nft: string;
   agent_id: number;
+  cost_of_bond: number;
+  fund_requirements: MiddlewareFundRequirementsTemplate;
+  monthly_gas_estimate: number;
+  // added on deployment
+  nft: string;
+  rpc?: string;
+  // added on deployment
+  staking_program_id?: StakingProgramId;
   threshold: number;
   use_staking: boolean;
-  cost_of_bond: number;
-  monthly_gas_estimate: number;
-  fund_requirements: MiddlewareFundRequirementsTemplate;
 };
 
 export type MiddlewareFundRequirementsTemplate = {
@@ -87,8 +89,8 @@ export type MiddlewareDeployedNodes = {
 };
 
 export type MiddlewareDeployment = {
-  status: MiddlewareDeploymentStatus;
   nodes: MiddlewareDeployedNodes;
+  status: MiddlewareDeploymentStatus;
 };
 
 export type EmptyPayload = Record<string, never>;
@@ -96,13 +98,13 @@ export type EmptyPayload = Record<string, never>;
 export type EmptyResponse = Record<string, never>;
 
 export type HttpResponse = {
-  error?: string;
   data?: string;
+  error?: string;
 };
 
 export type ClientResponse<ResponseType> = {
-  error?: string;
   data?: ResponseType;
+  error?: string;
 };
 
 export type MiddlewareStopDeployment = {
@@ -110,8 +112,8 @@ export type MiddlewareStopDeployment = {
 };
 
 export type MiddlewareUpdateServicePayload = {
-  old: ServiceHash;
   new: MiddlewareServiceTemplate;
+  old: ServiceHash;
 };
 
 export type MiddlewareDeleteServicesPayload = {
@@ -130,9 +132,9 @@ export type MiddlewareAppInfo = {
 
 export type MiddlewareWalletResponse = {
   address: Address;
-  safe_chains: MiddlewareChain[];
   ledger_type: MiddlewareLedger;
   safe: Address;
+  safe_chains: MiddlewareChain[];
   safe_nonce: number;
 };
 

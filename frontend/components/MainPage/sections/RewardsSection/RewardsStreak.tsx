@@ -24,8 +24,8 @@ const Streak = ({
   streak,
   isLoading,
 }: {
-  streak: number;
   isLoading: boolean;
+  streak: number;
 }) => {
   const { isEligibleForRewards } = useReward();
   if (isLoading) return <div>Loading...</div>;

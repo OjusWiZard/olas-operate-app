@@ -1,9 +1,9 @@
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 
 export type StakingProgramMeta = {
-  name: string;
   canMigrateTo: StakingProgramId[];
   deprecated: boolean;
+  name: string;
 };
 
 export const STAKING_PROGRAM_META: Record<

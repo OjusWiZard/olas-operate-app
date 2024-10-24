@@ -10,14 +10,14 @@ import { SetupScreen } from '@/enums/SetupScreen';
 import { Address } from '@/types/Address';
 
 type SetupObjectType = {
-  state: SetupScreen;
-  mnemonic: string[];
   backupSigner?: Address;
+  mnemonic: string[];
+  state: SetupScreen;
 };
 
 type SetupContextType = {
-  setupObject: SetupObjectType;
   setSetupObject: Dispatch<SetStateAction<SetupObjectType>>;
+  setupObject: SetupObjectType;
 };
 
 export const SetupContext = createContext<SetupContextType>({

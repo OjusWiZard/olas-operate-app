@@ -6,41 +6,40 @@ import {
   SetStateAction,
   useCallback,
   useContext,
-  useMemo,
   useState,
 } from 'react';
 import { useInterval } from 'usehooks-ts';
 
-import { MiddlewareDeploymentStatus, MiddlewareService } from '@/client';
-import { CHAINS } from '@/constants/chains';
+import {
+  MiddlewareDeploymentStatus,
+  MiddlewareService,
+  ServiceHash,
+} from '@/client';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
-import { Service } from '@/models/Service';
 import { ServicesService } from '@/service/Services';
 import { Address } from '@/types/Address';
 
 import { OnlineStatusContext } from './OnlineStatusProvider';
 
 type ServicesContextProps = {
-  services?: MiddlewareService[];
-  serviceAddresses?: Address[];
-  setServices: Dispatch<SetStateAction<MiddlewareService[] | undefined>>;
-  serviceStatus: MiddlewareDeploymentStatus | undefined;
-  setServiceStatus: Dispatch<
-    SetStateAction<MiddlewareDeploymentStatus | undefined>
-  >;
-  updateServicesState: () => Promise<void>;
-  updateServiceStatus: () => Promise<void>;
   hasInitialLoaded: boolean;
+  serviceAddresses?: Address[];
+  serviceStatuses: MiddlewareDeploymentStatus[];
+  services?: MiddlewareService[];
   setHasInitialLoaded: Dispatch<SetStateAction<boolean>>;
   setIsPaused: Dispatch<SetStateAction<boolean>>;
+  setServiceStatuses: Dispatch<SetStateAction<MiddlewareDeploymentStatus>>;
+  setServices: Dispatch<SetStateAction<MiddlewareService[]>>;
+  updateServiceStatus: () => Promise<void>;
+  updateServicesState: () => Promise<void>;
 };
 
 export const ServicesContext = createContext<ServicesContextProps>({
   services: undefined,
-  serviceAddresses: undefined,
+  serviceAddresses: [],
   setServices: () => {},
-  serviceStatus: undefined,
-  setServiceStatus: () => {},
+  serviceStatuses: [],
+  setServiceStatuses: () => {},
   updateServicesState: async () => {},
   updateServiceStatus: async () => {},
   hasInitialLoaded: false,
@@ -51,42 +50,20 @@ export const ServicesContext = createContext<ServicesContextProps>({
 export const ServicesProvider = ({ children }: PropsWithChildren) => {
   const { isOnline } = useContext(OnlineStatusContext);
 
-  const [services, setServices] = useState<Service[]>();
+  const [services, setServices] = useState<MiddlewareService[]>();
 
-  const [serviceStatus, setServiceStatus] = useState<
-    MiddlewareDeploymentStatus | undefined
-  >();
+  const [serviceStatuses, setServiceStatuses] = useState<
+    Record<ServiceHash, MiddlewareDeploymentStatus>
+  >({});
 
   const [hasInitialLoaded, setHasInitialLoaded] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  const serviceAddresses = useMemo(
-    () =>
-      services?.reduce<Address[]>((acc, service: MiddlewareService) => {
-        const instances =
-          service.chain_configs[CHAINS.GNOSIS.chainId].chain_data.instances;
-        if (instances) {
-          acc.push(...instances);
-        }
-
-        const multisig =
-          service.chain_configs[CHAINS.GNOSIS.chainId].chain_data.multisig;
-        if (multisig) {
-          acc.push(multisig);
-        }
-        return acc;
-      }, []),
-    [services],
-  );
-
-  const updateServicesState = useCallback(
+  const updateServices = useCallback(
     async (): Promise<void> =>
       ServicesService.getServices()
         .then((data: MiddlewareService[]) => {
           if (!Array.isArray(data)) return;
-          const services = data.map(
-            (service) => new Service({ middlewareService: service }),
-          );
           setServices(data);
           setHasInitialLoaded(true);
         })
@@ -97,17 +74,21 @@ export const ServicesProvider = ({ children }: PropsWithChildren) => {
     [],
   );
 
-  const updateServiceStatus = useCallback(async () => {
+  // @todo: update once we have multiple services
+  const updateServiceStatuses = useCallback(async () => {
     if (!services?.[0]) return;
-    const serviceStatus = await ServicesService.getDeployment(services[0].hash);
-    setServiceStatus(serviceStatus.status);
+    const deployment = await ServicesService.getDeployment(services[0].hash);
+
+    setServiceStatuses({
+      [services[0].hash]: deployment.status,
+    });
   }, [services]);
 
   // Update service state
   useInterval(
     () =>
-      updateServicesState()
-        .then(() => updateServiceStatus())
+      updateServices()
+        .then(() => updateServiceStatuses())
         .catch((e) => message.error(e.message)),
     isOnline && !isPaused ? FIVE_SECONDS_INTERVAL : null,
   );
@@ -116,13 +97,12 @@ export const ServicesProvider = ({ children }: PropsWithChildren) => {
     <ServicesContext.Provider
       value={{
         services,
-        serviceAddresses,
         setServices,
-        updateServicesState,
-        updateServiceStatus,
+        updateServicesState: updateServices,
+        updateServiceStatus: updateServiceStatuses,
         hasInitialLoaded,
-        serviceStatus,
-        setServiceStatus,
+        serviceStatuses,
+        setServiceStatuses,
         setHasInitialLoaded,
         setIsPaused,
       }}

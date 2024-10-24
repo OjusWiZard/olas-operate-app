@@ -1,9 +1,9 @@
 export type ElectronStore = {
-  environmentName?: string;
-  isInitialFunded?: boolean;
-  firstStakingRewardAchieved?: boolean;
-  firstRewardNotificationShown?: boolean;
   agentEvictionAlertShown?: boolean;
+  environmentName?: string;
+  firstRewardNotificationShown?: boolean;
+  firstStakingRewardAchieved?: boolean;
+  isInitialFunded?: boolean;
 };
 
 export type ElectronTrayIconStatus =

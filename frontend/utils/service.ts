@@ -1,5 +1,5 @@
 import { MiddlewareServiceTemplate } from '@/client';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 
 /** TODO: update from hardcoded, workaround for quick release */
 export const getMinimumStakedAmountRequired = (

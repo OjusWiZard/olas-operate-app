@@ -151,8 +151,8 @@ const readContract = ({
   address,
   abi,
 }: {
-  address: string;
   abi: ContractInterface;
+  address: string;
 }) => {
   const contract = new ethers.Contract(address, abi, gnosisProvider);
   return contract;

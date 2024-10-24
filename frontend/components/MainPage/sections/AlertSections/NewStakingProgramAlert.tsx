@@ -1,7 +1,7 @@
 import { Button, Flex, Typography } from 'antd';
 
 import { Pages } from '@/enums/PageState';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { usePageState } from '@/hooks/usePageState';
 import { useStakingProgram } from '@/hooks/useStakingProgram';
 

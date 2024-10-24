@@ -11,11 +11,12 @@
     "React": true
   },
   "plugins": [
+    "import",
     "jest",
     "prettier",
-    "unused-imports",
     "simple-import-sort",
-    "import"
+    "typescript-sort-keys",
+    "unused-imports"
   ],
   "rules": {
     "import/first": "error",
@@ -24,17 +25,34 @@
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "unused-imports/no-unused-imports": "error",
-    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-    "no-console": ["error", { "allow": ["error"] }],
-    "prettier/prettier": ["error", {
-      "endOfLine": "auto",
-      "semi": true,
-      "singleQuote": true
-    }],
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "error"
+        ]
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "all"
+      }
+    ],
     "react/jsx-props-no-spreading": "off",
     "react/no-array-index-key": "off",
-    "react/react-in-jsx-scope": "off",    
-    "react-hooks/rules-of-hooks": "error", 
-    "react-hooks/exhaustive-deps": "warn"
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "typescript-sort-keys/interface": "error"
   }
 }

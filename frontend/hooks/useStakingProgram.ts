@@ -41,9 +41,7 @@ export const useStakingProgram = () => {
   }, [activeStakingProgramId]);
 
   const defaultStakingProgramAddress =
-    STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS][
-      defaultStakingProgramId
-    ];
+    STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS][defaultStakingProgramId];
 
   return {
     activeStakingProgramAddress,

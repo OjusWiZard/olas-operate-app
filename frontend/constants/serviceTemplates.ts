@@ -1,5 +1,5 @@
 import { MiddlewareServiceTemplate } from '@/client';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 
 export const SERVICE_TEMPLATES: MiddlewareServiceTemplate[] = [
   {

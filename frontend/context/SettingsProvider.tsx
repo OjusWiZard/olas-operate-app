@@ -3,8 +3,8 @@ import { createContext, PropsWithChildren, useState } from 'react';
 import { SettingsScreen } from '@/enums/SettingsScreen';
 
 export const SettingsContext = createContext<{
-  screen: SettingsScreen;
   goto: (screen: SettingsScreen) => void;
+  screen: SettingsScreen;
 }>({
   screen: SettingsScreen.Main,
   goto: () => {},

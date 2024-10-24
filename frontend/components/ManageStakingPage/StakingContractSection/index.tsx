@@ -6,7 +6,7 @@ import { CardSection } from '@/components/styled/CardSection';
 import { STAKING_PROXY_ADDRESSES } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { StakingProgramStatus } from '@/enums/StakingProgramStatus';
 import { useStakingProgram } from '@/hooks/useStakingProgram';
 
@@ -32,9 +32,7 @@ export const StakingContractSection = ({
   const { migrateValidation } = useMigrate(stakingProgramId);
 
   const stakingContractAddress =
-    STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS][
-      stakingProgramId
-    ];
+    STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS][stakingProgramId];
 
   const stakingProgramMeta = STAKING_PROGRAM_META[stakingProgramId];
 

@@ -17,7 +17,7 @@ import {
 } from '@/constants/contractAddresses';
 import { gnosisMulticallProvider } from '@/constants/providers';
 import { ServiceRegistryL2ServiceState } from '@/enums/ServiceRegistryL2ServiceState';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { Address } from '@/types/Address';
 import { StakingContractInfo, StakingRewardsInfo } from '@/types/Autonolas';
 

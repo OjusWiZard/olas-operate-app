@@ -1,7 +1,6 @@
 import { PropsWithChildren, useCallback, useEffect, useRef } from 'react';
 
 import { MiddlewareDeploymentStatus } from '@/client';
-import { useElectronApi } from '@/hooks/useElectronApi';
 import { useReward } from '@/hooks/useReward';
 import { useServices } from '@/hooks/useServices';
 

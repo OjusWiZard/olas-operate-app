@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { MiddlewareChain } from '@/client';
 import { STAKING_PROXY_ADDRESSES } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { useServices } from '@/hooks/useServices';
 
 import { EpochDetails, StakingRewardSchema } from './types';
@@ -25,7 +25,8 @@ const RewardHistoryResponseSchema = z.object({
 type RewardHistoryResponse = z.infer<typeof RewardHistoryResponseSchema>;
 
 const betaAddress = STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta;
-const beta2Address = STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta_2;
+const beta2Address =
+  STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta_2;
 
 const SUBGRAPH_URL =
   'https://api.studio.thegraph.com/query/81855/pearl-staking-rewards-history/version/latest';
@@ -113,7 +114,7 @@ const getTimestampOfFirstReward = (
 };
 
 export const useRewardsHistory = () => {
-  const { serviceId } = useServices();
+  const { serviceIds: serviceId } = useServices();
   const { data, isError, isLoading, isFetching, refetch } = useQuery({
     queryKey: [],
     async queryFn() {

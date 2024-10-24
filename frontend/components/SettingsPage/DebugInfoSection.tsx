@@ -52,11 +52,11 @@ const DebugItem = ({
   item,
 }: {
   item: {
-    title: string;
-    balance: Record<Token.ETH | Token.OLAS, string>;
     address: `0x${string}`;
+    balance: Record<Token.ETH | Token.OLAS, string>;
+    link?: { href: string; title: string };
+    title: string;
     truncatedAddress: string;
-    link?: { title: string; href: string };
   };
 }) => {
   const onCopyToClipboard = useCallback(

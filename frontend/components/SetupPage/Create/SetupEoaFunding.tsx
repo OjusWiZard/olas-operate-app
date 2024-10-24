@@ -39,7 +39,8 @@ export const SetupEoaFunding = ({
 
   const isFundedMasterEoa =
     eoaBalance?.ETH &&
-    eoaBalance.ETH >= MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation;
+    eoaBalance.ETH >=
+      MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation;
 
   const statusMessage = useMemo(() => {
     if (isFundedMasterEoa) {
@@ -63,8 +64,9 @@ export const SetupEoaFunding = ({
         disabled={isIncomplete}
       />
       <Typography.Title level={3}>
-        Deposit {MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation} XDAI on
-        Gnosis
+        Deposit{' '}
+        {MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation} XDAI
+        on Gnosis
       </Typography.Title>
       <Typography.Paragraph style={{ marginBottom: 0 }}>
         The app needs these funds to create your account on-chain.

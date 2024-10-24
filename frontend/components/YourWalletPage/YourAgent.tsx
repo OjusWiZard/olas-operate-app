@@ -36,7 +36,7 @@ const NftCard = styled(Card)`
 `;
 
 const ServiceAndNftDetails = () => {
-  const { serviceId } = useServices();
+  const { serviceIds: serviceId } = useServices();
   const serviceAddress =
     SERVICE_REGISTRY_L2_ADDRESSES[`${MiddlewareChain.GNOSIS}`];
 

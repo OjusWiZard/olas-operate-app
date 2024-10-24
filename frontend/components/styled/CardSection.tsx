@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { COLOR } from '@/constants/colors';
 
 type CardSectionProps = FlexProps & {
-  bordertop?: 'true' | 'false';
   borderbottom?: 'true' | 'false';
+  bordertop?: 'true' | 'false';
   padding?: string;
   vertical?: boolean;
 };

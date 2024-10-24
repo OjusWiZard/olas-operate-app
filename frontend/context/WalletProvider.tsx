@@ -11,8 +11,8 @@ import { OnlineStatusContext } from './OnlineStatusProvider';
 export const WalletContext = createContext<{
   masterEoaAddress?: Address;
   masterSafeAddress?: Address;
-  wallets?: Wallet[];
   updateWallets: () => Promise<void>;
+  wallets?: Wallet[];
 }>({
   masterEoaAddress: undefined,
   masterSafeAddress: undefined,

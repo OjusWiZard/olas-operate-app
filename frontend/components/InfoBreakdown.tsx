@@ -45,10 +45,10 @@ type Info = {
   rightClassName?: string;
 };
 type InfoBreakdownListProps = {
+  color?: Color;
   list: Info[];
   parentStyle?: CSSProperties;
   size?: Size;
-  color?: Color;
 };
 
 export const InfoBreakdownList = ({

@@ -1,5 +1,5 @@
 import { MechType } from '@/enums/MechType';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { Address } from '@/types/Address';
 
 import { ChainId } from './chains';
@@ -56,11 +56,11 @@ export const AGENT_MECH_ADDRESSES: {
   };
 } = {
   [ChainId.GNOSIS]: {
-    [MechType.STANDARD]: '0x77af31De935740567Cf4fF1986D04B2c964A786a',
-    [MechType.MARKETPLACE]: '0x1c2F82413666d2a3fD8bC337b0268e62dDF67434',
+    [MechType.Agent]: '0x77af31De935740567Cf4fF1986D04B2c964A786a',
+    [MechType.Marketplace]: '0x1c2F82413666d2a3fD8bC337b0268e62dDF67434',
   },
   [ChainId.OPTIMISM]: {
-    [MechType.STANDARD]: '0x77af31De935740567Cf4fF1986D04B2c964A786a',
+    [MechType.Agent]: '0x77af31De935740567Cf4fF1986D04B2c964A786a',
   },
 };
 
@@ -73,10 +73,10 @@ export const MECH_ACTIVITY_CHECKER_ADDRESSES: {
   };
 } = {
   [ChainId.GNOSIS]: {
-    [MechType.STANDARD]: '0x155547857680A6D51bebC5603397488988DEb1c8',
-    [MechType.MARKETPLACE]: '0x1c2F82413666d2a3fD8bC337b0268e62dDF67434',
+    [MechType.Agent]: '0x155547857680A6D51bebC5603397488988DEb1c8',
+    [MechType.Marketplace]: '0x1c2F82413666d2a3fD8bC337b0268e62dDF67434',
   },
   [ChainId.OPTIMISM]: {
-    [MechType.STANDARD]: '0x155547857680A6D51bebC5603397488988DEb1c8',
+    [MechType.Agent]: '0x155547857680A6D51bebC5603397488988DEb1c8',
   },
 };

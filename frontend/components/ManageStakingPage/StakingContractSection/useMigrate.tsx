@@ -2,7 +2,7 @@ import { isNil } from 'lodash';
 import { useMemo } from 'react';
 
 import { MiddlewareDeploymentStatus } from '@/client';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { useBalance } from '@/hooks/useBalance';
 import { useServices } from '@/hooks/useServices';
 import { useServiceTemplates } from '@/hooks/useServiceTemplates';

@@ -16,8 +16,8 @@ import { WalletContext } from './WalletProvider';
 
 export const MasterSafeContext = createContext<{
   backupSafeAddress?: Address;
-  masterSafeAddress?: Address;
   masterEoaAddress?: Address;
+  masterSafeAddress?: Address;
   masterSafeOwners?: Address[];
   updateMasterSafeOwners: () => Promise<void>;
 }>({

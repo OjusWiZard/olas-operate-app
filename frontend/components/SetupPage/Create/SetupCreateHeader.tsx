@@ -10,8 +10,8 @@ export const SetupCreateHeader = memo(function SetupCreateHeader({
   prev,
   disabled = false,
 }: {
-  prev: SetupScreen;
   disabled?: boolean;
+  prev: SetupScreen;
 }) {
   const { goto } = useSetup();
   const handleBack = () => goto(prev);

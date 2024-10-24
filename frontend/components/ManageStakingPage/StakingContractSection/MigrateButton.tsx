@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { MiddlewareDeploymentStatus } from '@/client';
 import { Pages } from '@/enums/PageState';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { useBalance } from '@/hooks/useBalance';
 import { useModals } from '@/hooks/useModals';
 import { usePageState } from '@/hooks/usePageState';

@@ -8,7 +8,7 @@ import { getMinimumStakedAmountRequired } from '@/utils/service';
 
 const { Title, Paragraph } = Typography;
 
-type FirstRunModalProps = { open: boolean; onClose: () => void };
+type FirstRunModalProps = { onClose: () => void; open: boolean };
 
 export const FirstRunModal: FC<FirstRunModalProps> = ({ open, onClose }) => {
   const { getServiceTemplates } = useServiceTemplates();

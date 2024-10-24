@@ -1,6 +1,10 @@
 import { useContext } from 'react';
 
-import { MiddlewareService, ServiceHash, MiddlewareServiceTemplate } from '@/client';
+import {
+  MiddlewareService,
+  MiddlewareServiceTemplate,
+  ServiceHash,
+} from '@/client';
 import { CHAINS } from '@/constants/chains';
 import { ServicesContext } from '@/context/ServicesProvider';
 import MulticallService from '@/service/Multicall';
@@ -51,14 +55,11 @@ export const useServices = () => {
     updateServicesState,
     hasInitialLoaded,
     setServices,
-    serviceStatus,
-    setServiceStatus,
+    serviceStatuses,
+    setServiceStatuses,
     updateServiceStatus,
     setIsPaused,
   } = useContext(ServicesContext);
-
-  const serviceId =
-    services?.[0]?.chain_configs[CHAINS.GNOSIS.chainId].chain_data?.token;
 
   // STATE METHODS
   const getServiceFromState = (
@@ -73,29 +74,30 @@ export const useServices = () => {
     hasInitialLoaded ? services : [];
 
   const updateServiceState = (serviceHash: ServiceHash) => {
-    ServicesService.getService(serviceHash).then((service: MiddlewareService) => {
-      setServices((prev) => {
-        if (!prev) return [service];
+    ServicesService.getService(serviceHash).then(
+      (service: MiddlewareService) => {
+        setServices((prev) => {
+          if (!prev) return [service];
 
-        const index = prev.findIndex((s) => s.hash === serviceHash); // findIndex returns -1 if not found
-        if (index === -1) return [...prev, service];
+          const index = prev.findIndex((s) => s.hash === serviceHash); // findIndex returns -1 if not found
+          if (index === -1) return [...prev, service];
 
-        const newServices = [...prev];
-        newServices[index] = service;
-        return newServices;
-      });
-    });
+          const newServices = [...prev];
+          newServices[index] = service;
+          return newServices;
+        });
+      },
+    );
   };
 
   const deleteServiceState = (serviceHash: ServiceHash) =>
     setServices((prev) => prev?.filter((s) => s.hash !== serviceHash));
 
   return {
-    service: services?.[0],
     services,
     serviceId,
-    serviceStatus,
-    setServiceStatus,
+    serviceStatuses,
+    setServiceStatuses,
     getServiceFromState,
     getServicesFromState,
     checkServiceIsFunded,

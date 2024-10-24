@@ -6,7 +6,7 @@ import { MODAL_WIDTH } from '@/constants/width';
 import { useServiceTemplates } from '@/hooks/useServiceTemplates';
 import { getMinimumStakedAmountRequired } from '@/utils/service';
 
-type FirstRunModalProps = { open: boolean; onClose: () => void };
+type FirstRunModalProps = { onClose: () => void; open: boolean };
 
 export const FirstRunModal: FC<FirstRunModalProps> = ({ open, onClose }) => {
   const { getServiceTemplates } = useServiceTemplates();

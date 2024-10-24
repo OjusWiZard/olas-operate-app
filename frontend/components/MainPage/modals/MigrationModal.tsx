@@ -10,8 +10,8 @@ export const MigrationSuccessModal = ({
   open,
   onClose,
 }: {
-  open: boolean;
   onClose: () => void;
+  open: boolean;
 }) => {
   const { activeStakingProgramId } = useStakingProgram();
 

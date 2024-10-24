@@ -1,4 +1,4 @@
 export type TransactionInfo = {
-  timestamp: number;
   hash: string;
+  timestamp: number;
 };

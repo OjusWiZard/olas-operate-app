@@ -1,4 +1,4 @@
 export enum MechType {
-  STANDARD = 'standard',
-  MARKETPLACE = 'marketplace',
+  Agent = 'agent',
+  Marketplace = 'marketplace',
 }

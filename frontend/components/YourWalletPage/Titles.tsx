@@ -7,7 +7,7 @@ import { AddressLink } from '../AddressLink';
 
 const { Paragraph, Text, Title } = Typography;
 
-type SignerTitleProps = { signerText: string; signerAddress?: Address };
+type SignerTitleProps = { signerAddress?: Address; signerText: string };
 
 export const SignerTitle = ({
   signerText,

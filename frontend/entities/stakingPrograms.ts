@@ -1,6 +1,6 @@
 import { AgentType } from '@/enums/AgentType';
 import { MechType } from '@/enums/MechType';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { StakingProgram } from '@/models/StakingProgram';
 
 import { ChainId } from '../constants/chains';
@@ -67,7 +67,7 @@ const predict_pearlBeta = new StakingProgram({
   chainId: ChainId.GNOSIS,
   stakingProgramId: StakingProgramId.Beta,
   canMigrateTo: [StakingProgramId.Beta2, StakingProgramId.MechMarketplace],
-  mechType: MechType.STANDARD,
+  mechType: MechType.Agent,
   supportedAgentTypes: [AgentType.PredictTrader],
 });
 
@@ -75,7 +75,7 @@ const predict_pearlBeta2 = new StakingProgram({
   chainId: ChainId.GNOSIS,
   stakingProgramId: StakingProgramId.Beta2,
   canMigrateTo: [StakingProgramId.Beta, StakingProgramId.MechMarketplace],
-  mechType: MechType.STANDARD,
+  mechType: MechType.Agent,
   supportedAgentTypes: [AgentType.PredictTrader],
 });
 
@@ -87,7 +87,7 @@ const predict_pearlAlpha = new StakingProgram({
     StakingProgramId.Beta,
     StakingProgramId.MechMarketplace,
   ],
-  mechType: MechType.STANDARD,
+  mechType: MechType.Agent,
   supportedAgentTypes: [AgentType.PredictTrader],
 });
 
@@ -99,7 +99,7 @@ const predict_pearlMechMarketplace = new StakingProgram({
     StakingProgramId.Beta,
     StakingProgramId.MechMarketplace,
   ],
-  mechType: MechType.MARKETPLACE,
+  mechType: MechType.Marketplace,
   supportedAgentTypes: [AgentType.PredictTrader],
 });
 

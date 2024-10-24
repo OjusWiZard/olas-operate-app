@@ -13,9 +13,10 @@ import { useInterval } from 'usehooks-ts';
 
 import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { PredictStakingProgramId } from '@/enums/StakingProgramId';
 import { AutonolasService } from '@/service/Autonolas';
 import { StakingContractInfo } from '@/types/Autonolas';
+import { StakingProgramId } from '@/types/StakingProgram';
 
 import { ServicesContext } from './ServicesProvider';
 import { StakingProgramContext } from './StakingProgramProvider';
@@ -24,12 +25,12 @@ type StakingContractInfoContextProps = {
   activeStakingContractInfo?: Partial<StakingContractInfo>;
   isPaused: boolean;
   isStakingContractInfoLoaded: boolean;
+  setIsPaused: Dispatch<SetStateAction<boolean>>;
   stakingContractInfoRecord?: Record<
     StakingProgramId,
     Partial<StakingContractInfo>
   >;
   updateActiveStakingContractInfo: () => Promise<void>;
-  setIsPaused: Dispatch<SetStateAction<boolean>>;
 };
 
 export const StakingContractInfoContext =
@@ -85,14 +86,18 @@ export const StakingContractInfoProvider = ({
   /** Updates general staking contract information, not user or service specific */
   const updateStakingContractInfoRecord = async () => {
     const alpha = AutonolasService.getStakingContractInfoByStakingProgram(
-      StakingProgramId.Alpha,
+      PredictStakingProgramId.Alpha,
     );
     const beta = AutonolasService.getStakingContractInfoByStakingProgram(
-      StakingProgramId.Beta,
+      PredictStakingProgramId.Beta,
     );
     const beta_2 = AutonolasService.getStakingContractInfoByStakingProgram(
-      StakingProgramId.Beta2,
+      PredictStakingProgramId.Beta2,
     );
+    const beta_mech_marketplace =
+      AutonolasService.getStakingContractInfoByStakingProgram(
+        PredictStakingProgramId.MechMarketplace,
+      );
 
     try {
       const [alphaInfo, betaInfo, beta2Info] = await Promise.all([

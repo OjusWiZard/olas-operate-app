@@ -3,7 +3,7 @@ import { Button, Card, Flex } from 'antd';
 import { useEffect } from 'react';
 
 import { Pages } from '@/enums/PageState';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 import { useBalance } from '@/hooks/useBalance';
 import { useMasterSafe } from '@/hooks/useMasterSafe';
 import { usePageState } from '@/hooks/usePageState';

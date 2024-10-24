@@ -4,34 +4,35 @@ import { createContext, PropsWithChildren } from 'react';
 import { ElectronStore, ElectronTrayIconStatus } from '@/types/ElectronApi';
 
 type ElectronApiContextProps = {
-  getAppVersion?: () => Promise<string>;
-  setIsAppLoaded?: (isLoaded: boolean) => void;
   closeApp?: () => void;
-  minimizeApp?: () => void;
-  setTrayIcon?: (status: ElectronTrayIconStatus) => void;
+  getAppVersion?: () => Promise<string>;
   ipcRenderer?: {
-    send?: (channel: string, data: unknown) => void; // send messages to main process
+    // listen to messages from main process
+    invoke?: (channel: string, data: unknown) => Promise<unknown>; // send messages to main process
     on?: (
       channel: string,
       func: (event: unknown, data: unknown) => void,
-    ) => void; // listen to messages from main process
-    invoke?: (channel: string, data: unknown) => Promise<unknown>; // send message to main process and get Promise response
+    ) => void;
+    send?: (channel: string, data: unknown) => void; // send message to main process and get Promise response
   };
+  minimizeApp?: () => void;
+  notifyAgentRunning?: () => void;
+  openPath?: (filePath: string) => void;
+  saveLogs?: (data: {
+    debugData?: Record<string, unknown>;
+    store?: ElectronStore;
+  }) => Promise<{ dirPath: string; success: true } | { success?: false }>;
+  setAppHeight?: (height: unknown) => void;
+  setIsAppLoaded?: (isLoaded: boolean) => void;
+  setTrayIcon?: (status: ElectronTrayIconStatus) => void;
+  showNotification?: (title: string, body?: string) => void;
   store?: {
-    store?: () => Promise<ElectronStore>;
+    clear?: () => Promise<void>;
+    delete?: (key: string) => Promise<void>;
     get?: (key: string) => Promise<unknown>;
     set?: (key: string, value: unknown) => Promise<void>;
-    delete?: (key: string) => Promise<void>;
-    clear?: () => Promise<void>;
+    store?: () => Promise<ElectronStore>;
   };
-  setAppHeight?: (height: unknown) => void;
-  notifyAgentRunning?: () => void;
-  showNotification?: (title: string, body?: string) => void;
-  saveLogs?: (data: {
-    store?: ElectronStore;
-    debugData?: Record<string, unknown>;
-  }) => Promise<{ success: true; dirPath: string } | { success?: false }>;
-  openPath?: (filePath: string) => void;
 };
 
 export const ElectronApiContext = createContext<ElectronApiContextProps>({

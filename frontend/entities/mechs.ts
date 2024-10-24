@@ -13,20 +13,20 @@ export const MECHS: {
   };
 } = {
   [ChainId.GNOSIS]: {
-    [MechType.STANDARD]: new MechStandard({
+    [MechType.Agent]: new MechStandard({
       chainId: ChainId.GNOSIS,
-      address: AGENT_MECH_ADDRESSES[ChainId.GNOSIS][MechType.STANDARD],
+      address: AGENT_MECH_ADDRESSES[ChainId.GNOSIS][MechType.Agent],
       activityChecker:
-        MECH_ACTIVITY_CHECKER_ADDRESSES[ChainId.GNOSIS][MechType.STANDARD],
+        MECH_ACTIVITY_CHECKER_ADDRESSES[ChainId.GNOSIS][MechType.Agent],
     }),
     // [MechType.MARKETPLACE]: new MechStandard({});
   },
   [ChainId.OPTIMISM]: {
-    [MechType.STANDARD]: new MechStandard({
+    [MechType.Agent]: new MechStandard({
       chainId: ChainId.OPTIMISM,
-      address: AGENT_MECH_ADDRESSES[ChainId.OPTIMISM][MechType.STANDARD],
+      address: AGENT_MECH_ADDRESSES[ChainId.OPTIMISM][MechType.Agent],
       activityChecker:
-        MECH_ACTIVITY_CHECKER_ADDRESSES[ChainId.OPTIMISM][MechType.STANDARD],
+        MECH_ACTIVITY_CHECKER_ADDRESSES[ChainId.OPTIMISM][MechType.Agent],
     }),
   },
 };

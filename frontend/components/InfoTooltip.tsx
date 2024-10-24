@@ -7,8 +7,8 @@ export const InfoTooltip = ({
   placement = 'topLeft',
   children,
 }: {
-  placement?: TooltipPlacement;
   children: React.ReactNode;
+  placement?: TooltipPlacement;
 }) => (
   <Tooltip arrow={false} title={children} placement={placement}>
     <InfoCircleOutlined style={{ color: COLOR.TEXT_LIGHT }} />

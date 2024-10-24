@@ -25,8 +25,8 @@ export const RewardContext = createContext<{
   availableRewardsForEpoch?: number;
   availableRewardsForEpochEth?: number;
   isEligibleForRewards?: boolean;
-  optimisticRewardsEarnedForEpoch?: number;
   minimumStakedAmountRequired?: number;
+  optimisticRewardsEarnedForEpoch?: number;
   updateRewards: () => Promise<void>;
 }>({
   accruedServiceStakingRewards: undefined,

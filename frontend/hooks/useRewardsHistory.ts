@@ -9,7 +9,7 @@ import { MiddlewareChain } from '@/client';
 import { STAKING_PROXY_ADDRESSES } from '@/constants/contractAddresses';
 import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
 import { SUBGRAPH_URL } from '@/constants/urls';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/enums/StakingProgramId';
 
 import { useServices } from './useServices';
 
@@ -41,11 +41,9 @@ const CheckpointGraphResponseSchema = z.object({
 });
 type CheckpointGraphResponse = z.infer<typeof CheckpointGraphResponseSchema>;
 
-const betaAddress =
-  STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta;
+const betaAddress = STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta;
 const beta2Address =
-  STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS]
-    .pearl_beta_2;
+  STAKING_PROXY_ADDRESSES[MiddlewareChain.GNOSIS].pearl_beta_2;
 
 const fetchRewardsQuery = gql`
   {
@@ -64,17 +62,17 @@ const fetchRewardsQuery = gql`
 `;
 
 type TransformedCheckpoint = {
-  epoch: string;
-  rewards: string[];
-  serviceIds: string[];
   blockTimestamp: string;
-  transactionHash: string;
-  epochLength: string;
   contractAddress: string;
+  earned: boolean;
+  epoch: string;
   epochEndTimeStamp: number;
+  epochLength: string;
   epochStartTimeStamp: number;
   reward: number;
-  earned: boolean;
+  rewards: string[];
+  serviceIds: string[];
+  transactionHash: string;
 };
 
 const transformCheckpoints = (
@@ -150,7 +148,7 @@ const getTimestampOfFirstReward = (
 };
 
 export const useRewardsHistory = () => {
-  const { serviceId } = useServices();
+  const { serviceIds: serviceId } = useServices();
 
   const { data, isError, isLoading, isFetching, refetch } = useQuery({
     queryKey: [],

@@ -39,23 +39,23 @@ import { ServicesContext } from './ServicesProvider';
 import { WalletContext } from './WalletProvider';
 
 export const BalanceContext = createContext<{
-  isLoaded: boolean;
-  setIsLoaded: Dispatch<SetStateAction<boolean>>;
+  agentEoaBalance?: ValueOf<WalletAddressNumberRecord>;
+  agentSafeBalance?: ValueOf<WalletAddressNumberRecord>;
+  eoaBalance?: ValueOf<WalletAddressNumberRecord>;
   isBalanceLoaded: boolean;
+  isLoaded: boolean;
+  isLowBalance: boolean;
   olasBondBalance?: number;
   olasDepositBalance?: number;
-  eoaBalance?: ValueOf<WalletAddressNumberRecord>;
   safeBalance?: ValueOf<WalletAddressNumberRecord>;
+  setIsLoaded: Dispatch<SetStateAction<boolean>>;
+  setIsPaused: Dispatch<SetStateAction<boolean>>;
   totalEthBalance?: number;
   totalOlasBalance?: number;
-  isLowBalance: boolean;
-  wallets?: Wallet[];
-  walletBalances: WalletAddressNumberRecord;
-  agentSafeBalance?: ValueOf<WalletAddressNumberRecord>;
-  agentEoaBalance?: ValueOf<WalletAddressNumberRecord>;
-  updateBalances: () => Promise<void>;
-  setIsPaused: Dispatch<SetStateAction<boolean>>;
   totalOlasStakedBalance?: number;
+  updateBalances: () => Promise<void>;
+  walletBalances: WalletAddressNumberRecord;
+  wallets?: Wallet[];
 }>({
   isLoaded: false,
   setIsLoaded: () => {},
@@ -212,10 +212,12 @@ export const BalanceProvider = ({ children }: PropsWithChildren) => {
     () => masterEoaAddress && walletBalances[masterEoaAddress],
     [masterEoaAddress, walletBalances],
   );
+
   const safeBalance = useMemo(
     () => masterSafeAddress && walletBalances[masterSafeAddress],
     [masterSafeAddress, walletBalances],
   );
+
   const agentSafeBalance = useMemo(
     () =>
       services?.[0]?.chain_configs[CHAINS.GNOSIS.chainId].chain_data

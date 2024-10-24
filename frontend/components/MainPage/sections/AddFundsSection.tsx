@@ -128,8 +128,8 @@ const AddFundsAddressSection = ({
   handleCopy,
 }: {
   fundingAddress?: string;
-  truncatedFundingAddress?: string;
   handleCopy: () => void;
+  truncatedFundingAddress?: string;
 }) => (
   <CardSection gap={10} justify="center" align="center" padding="16px 24px">
     <Tooltip
