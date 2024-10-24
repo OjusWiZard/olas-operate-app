@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <OnlineStatusProvider>
-      <ElectronApiProvider>
+      {/* <ElectronApiProvider> */}
         <StoreProvider>
           <PageStateProvider>
             <ServicesProvider>
@@ -69,7 +69,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </ServicesProvider>
           </PageStateProvider>
         </StoreProvider>
-      </ElectronApiProvider>
+      {/* </ElectronApiProvider> */}
     </OnlineStatusProvider>
   );
 }
