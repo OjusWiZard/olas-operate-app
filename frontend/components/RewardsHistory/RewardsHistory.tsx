@@ -19,7 +19,6 @@ import {
 import { CSSProperties, ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { MiddlewareChain } from '@/types/middleware';
 import { CardTitle } from '@/components/Card/CardTitle';
 import { CardFlex } from '@/components/styled/CardFlex';
 import { COLOR } from '@/constants/colors';
@@ -29,6 +28,7 @@ import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { Pages } from '@/enums/PageState';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { usePageState } from '@/hooks/usePageState';
+import { MiddlewareChain } from '@/types/middleware';
 import { balanceFormat } from '@/utils/numberFormatters';
 import { formatToMonthDay, formatToShortDateTime } from '@/utils/time';
 
@@ -194,7 +194,9 @@ export const RewardsHistory = () => {
         {Object.keys(contractCheckpoints).map((contractAddress: string) => {
           const checkpoints = contractCheckpoints[contractAddress];
           const [stakingProgramId] = Object.entries(
-            SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[MiddlewareChain.GNOSIS],
+            SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[
+              MiddlewareChain.GNOSIS
+            ],
           ).find((entry) => {
             const [, stakingProxyAddress] = entry;
             return (

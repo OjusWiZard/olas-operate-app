@@ -3,13 +3,13 @@ import Image from 'next/image';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { MiddlewareChain } from '@/types/middleware';
 import { SERVICE_REGISTRY_L2_CONTRACT_ADDRESS } from '@/constants/contracts/config';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { useAddress } from '@/hooks/useAddress';
 import { useBalance } from '@/hooks/useBalance';
 import { useReward } from '@/hooks/useReward';
 import { useServices } from '@/hooks/useServices';
+import { MiddlewareChain } from '@/types/middleware';
 import { generateName } from '@/utils/agentName';
 import { balanceFormat } from '@/utils/numberFormatters';
 import { truncateAddress } from '@/utils/truncate';

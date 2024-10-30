@@ -2,7 +2,6 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, ButtonProps, Flex, Popover, Tooltip, Typography } from 'antd';
 import { useCallback, useMemo } from 'react';
 
-import { MiddlewareChain, MiddlewareDeploymentStatus } from '@/types/middleware';
 import { COLOR } from '@/constants/colors';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { useBalance } from '@/hooks/useBalance';
@@ -16,6 +15,10 @@ import { useStore } from '@/hooks/useStore';
 import { useWallet } from '@/hooks/useWallet';
 import { ServicesService } from '@/service/Services';
 import { WalletService } from '@/service/Wallet';
+import {
+  MiddlewareChain,
+  MiddlewareDeploymentStatus,
+} from '@/types/middleware';
 import { delayInSeconds } from '@/utils/delay';
 import { getMinimumStakedAmountRequired } from '@/utils/service';
 

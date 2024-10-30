@@ -1,8 +1,8 @@
 import { Flex, Typography } from 'antd';
 
-import { MiddlewareDeploymentStatus } from '@/types/middleware';
 import { useServices } from '@/hooks/useServices';
 import { useStore } from '@/hooks/useStore';
+import { MiddlewareDeploymentStatus } from '@/types/middleware';
 
 import { CustomAlert } from '../../Alert';
 import { CardSection } from '../../styled/CardSection';

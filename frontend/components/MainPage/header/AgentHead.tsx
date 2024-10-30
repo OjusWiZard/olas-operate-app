@@ -1,9 +1,9 @@
 import { Badge } from 'antd';
 import Image from 'next/image';
 
-import { MiddlewareDeploymentStatus } from '@/types/middleware';
 import { useReward } from '@/hooks/useReward';
 import { useServices } from '@/hooks/useServices';
+import { MiddlewareDeploymentStatus } from '@/types/middleware';
 
 const badgeOffset: [number, number] = [-5, 32.5];
 

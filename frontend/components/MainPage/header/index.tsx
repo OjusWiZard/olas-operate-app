@@ -1,10 +1,10 @@
 import { Flex } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 
-import { MiddlewareDeploymentStatus } from '@/types/middleware';
 import { useBalance } from '@/hooks/useBalance';
 import { useElectronApi } from '@/hooks/useElectronApi';
 import { useServices } from '@/hooks/useServices';
+import { MiddlewareDeploymentStatus } from '@/types/middleware';
 
 import { FirstRunModal } from '../modals/FirstRunModal';
 import { AgentButton } from './AgentButton';

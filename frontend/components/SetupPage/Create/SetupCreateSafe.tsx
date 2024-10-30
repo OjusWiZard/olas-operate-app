@@ -2,7 +2,6 @@ import { Card, message, Typography } from 'antd';
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { MiddlewareChain } from '@/types/middleware';
 import { CardSection } from '@/components/styled/CardSection';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { SUPPORT_URL } from '@/constants/urls';
@@ -12,6 +11,7 @@ import { usePageState } from '@/hooks/usePageState';
 import { useSetup } from '@/hooks/useSetup';
 import { useWallet } from '@/hooks/useWallet';
 import { WalletService } from '@/service/Wallet';
+import { MiddlewareChain } from '@/types/middleware';
 import { delayInSeconds } from '@/utils/delay';
 
 export const SetupCreateSafe = () => {

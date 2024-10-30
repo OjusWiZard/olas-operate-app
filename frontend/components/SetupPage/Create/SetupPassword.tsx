@@ -1,11 +1,11 @@
 import { Button, Checkbox, Form, Input, message, Typography } from 'antd';
 import { useState } from 'react';
 
-import { MiddlewareChain } from '@/types/middleware';
 import { SetupScreen } from '@/enums/SetupScreen';
 import { useSetup } from '@/hooks/useSetup';
 import { AccountService } from '@/service/Account';
 import { WalletService } from '@/service/Wallet';
+import { MiddlewareChain } from '@/types/middleware';
 
 import { CardFlex } from '../../styled/CardFlex';
 import { SetupCreateHeader } from './SetupCreateHeader';

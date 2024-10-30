@@ -11,7 +11,6 @@ import {
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { MiddlewareAccountIsSetup } from '@/types/middleware';
 import { Pages } from '@/enums/PageState';
 import { SetupScreen } from '@/enums/SetupScreen';
 import { useBalance } from '@/hooks/useBalance';
@@ -20,6 +19,7 @@ import { usePageState } from '@/hooks/usePageState';
 import { useSetup } from '@/hooks/useSetup';
 import { useWallet } from '@/hooks/useWallet';
 import { AccountService } from '@/service/Account';
+import { MiddlewareAccountIsSetup } from '@/types/middleware';
 
 import { FormFlex } from '../styled/FormFlex';
 

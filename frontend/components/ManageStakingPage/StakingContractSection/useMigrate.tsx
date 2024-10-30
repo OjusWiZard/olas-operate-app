@@ -1,13 +1,13 @@
 import { isNil } from 'lodash';
 import { useMemo } from 'react';
 
-import { MiddlewareDeploymentStatus } from '@/types/middleware';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { useBalance } from '@/hooks/useBalance';
 import { useServices } from '@/hooks/useServices';
 import { useServiceTemplates } from '@/hooks/useServiceTemplates';
 import { useStakingContractInfo } from '@/hooks/useStakingContractInfo';
 import { useStakingProgram } from '@/hooks/useStakingProgram';
+import { MiddlewareDeploymentStatus } from '@/types/middleware';
 import { getMinimumStakedAmountRequired } from '@/utils/service';
 
 export enum CantMigrateReason {

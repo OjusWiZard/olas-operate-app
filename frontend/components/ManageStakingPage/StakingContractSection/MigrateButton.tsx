@@ -2,7 +2,6 @@ import { Button, Popover } from 'antd';
 import { isNil } from 'lodash';
 import { useMemo } from 'react';
 
-import { MiddlewareDeploymentStatus } from '@/types/middleware';
 import { Pages } from '@/enums/PageState';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { useBalance } from '@/hooks/useBalance';
@@ -13,6 +12,7 @@ import { useServiceTemplates } from '@/hooks/useServiceTemplates';
 import { useStakingContractInfo } from '@/hooks/useStakingContractInfo';
 import { useStakingProgram } from '@/hooks/useStakingProgram';
 import { ServicesService } from '@/service/Services';
+import { MiddlewareDeploymentStatus } from '@/types/middleware';
 
 import { CountdownUntilMigration } from './CountdownUntilMigration';
 import { CantMigrateReason, useMigrate } from './useMigrate';

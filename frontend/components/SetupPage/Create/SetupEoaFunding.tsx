@@ -14,7 +14,6 @@ import {
 import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { MiddlewareChain } from '@/types/middleware';
 import { CustomAlert } from '@/components/Alert';
 import { CardFlex } from '@/components/styled/CardFlex';
 import { CardSection } from '@/components/styled/CardSection';
@@ -25,6 +24,7 @@ import { SetupScreen } from '@/enums/SetupScreen';
 import { useBalance } from '@/hooks/useBalance';
 import { useSetup } from '@/hooks/useSetup';
 import { useWallet } from '@/hooks/useWallet';
+import { MiddlewareChain } from '@/types/middleware';
 import { copyToClipboard } from '@/utils/copyToClipboard';
 
 import { SetupCreateHeader } from './SetupCreateHeader';
@@ -39,7 +39,8 @@ export const SetupEoaFunding = ({
 
   const isFundedMasterEoa =
     eoaBalance?.ETH &&
-    eoaBalance.ETH >= MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation;
+    eoaBalance.ETH >=
+      MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation;
 
   const statusMessage = useMemo(() => {
     if (isFundedMasterEoa) {
@@ -63,8 +64,9 @@ export const SetupEoaFunding = ({
         disabled={isIncomplete}
       />
       <Typography.Title level={3}>
-        Deposit {MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation} XDAI on
-        Gnosis
+        Deposit{' '}
+        {MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation} XDAI
+        on Gnosis
       </Typography.Title>
       <Typography.Paragraph style={{ marginBottom: 0 }}>
         The app needs these funds to create your account on-chain.
