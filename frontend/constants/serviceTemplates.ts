@@ -1,4 +1,4 @@
-import { ServiceTemplate } from '@/client';
+import { ServiceTemplate } from '@/types/middleware';
 import { StakingProgramId } from '@/enums/StakingProgram';
 
 export const SERVICE_TEMPLATES: ServiceTemplate[] = [
@@ -12,7 +12,7 @@ export const SERVICE_TEMPLATES: ServiceTemplate[] = [
     home_chain_id: '100',
     configurations: {
       100: {
-        staking_program_id: StakingProgramId.Beta, // default, may be overwritten
+        staking_program_id: StakingProgramId.PearlBeta, // default, may be overwritten
         nft: 'bafybeig64atqaladigoc3ds4arltdu63wkdrk3gesjfvnfdmz35amv7faq',
         rpc: 'http://localhost:8545',
         agent_id: 14,

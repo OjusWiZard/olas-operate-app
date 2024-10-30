@@ -1,7 +1,7 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { Button, Card } from 'antd';
 
-import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
+import { STAKING_PROGRAMS } from '@/constants/stakingPrograms';
 import { Pages } from '@/enums/PageState';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { usePageState } from '@/hooks/usePageState';
@@ -33,7 +33,7 @@ export const ManageStakingPage = () => {
       return [stakingProgramId, ...acc];
 
     // if the program is deprecated, ignore it
-    if (STAKING_PROGRAM_META[stakingProgramId]?.deprecated) {
+    if (STAKING_PROGRAMS[stakingProgramId]?.deprecated) {
       return acc;
     }
 
@@ -43,7 +43,7 @@ export const ManageStakingPage = () => {
 
   const otherStakingProgramIds = orderedStakingProgramIds.filter(
     (stakingProgramId) => {
-      const info = STAKING_PROGRAM_META[stakingProgramId];
+      const info = STAKING_PROGRAMS[stakingProgramId];
       if (!info) return false;
       if (activeStakingProgramId === stakingProgramId) return false;
       if (info.deprecated) return false;

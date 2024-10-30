@@ -11,7 +11,7 @@ import {
 } from 'react';
 import { useInterval } from 'usehooks-ts';
 
-import { DeploymentStatus, Service } from '@/client';
+import { MiddlewareDeploymentStatus, Service } from '@/types/middleware';
 import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
 import { ServicesService } from '@/service/Services';
@@ -23,8 +23,8 @@ type ServicesContextProps = {
   services?: Service[];
   serviceAddresses?: Address[];
   setServices: Dispatch<SetStateAction<Service[] | undefined>>;
-  serviceStatus: DeploymentStatus | undefined;
-  setServiceStatus: Dispatch<SetStateAction<DeploymentStatus | undefined>>;
+  serviceStatus: MiddlewareDeploymentStatus | undefined;
+  setServiceStatus: Dispatch<SetStateAction<MiddlewareDeploymentStatus | undefined>>;
   updateServicesState: () => Promise<void>;
   updateServiceStatus: () => Promise<void>;
   hasInitialLoaded: boolean;
@@ -51,7 +51,7 @@ export const ServicesProvider = ({ children }: PropsWithChildren) => {
   const [services, setServices] = useState<Service[]>();
 
   const [serviceStatus, setServiceStatus] = useState<
-    DeploymentStatus | undefined
+    MiddlewareDeploymentStatus | undefined
   >();
   const [hasInitialLoaded, setHasInitialLoaded] = useState(false);
   const [isPaused, setIsPaused] = useState(false);

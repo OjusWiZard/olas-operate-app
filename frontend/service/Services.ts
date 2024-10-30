@@ -1,4 +1,4 @@
-import { Deployment, Service, ServiceHash, ServiceTemplate } from '@/client';
+import { Deployment, Service, ServiceHash, ServiceTemplate } from '@/types/middleware';
 import { CONTENT_TYPE_JSON_UTF8 } from '@/constants/headers';
 import { BACKEND_URL } from '@/constants/urls';
 import { StakingProgramId } from '@/enums/StakingProgram';

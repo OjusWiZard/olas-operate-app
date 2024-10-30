@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { Service, ServiceHash, ServiceTemplate } from '@/client';
+import { Service, ServiceHash, ServiceTemplate } from '@/types/middleware';
 import { CHAINS } from '@/constants/chains';
 import { ServicesContext } from '@/context/ServicesProvider';
 import MulticallService from '@/service/Multicall';

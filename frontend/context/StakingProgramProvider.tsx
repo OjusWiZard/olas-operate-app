@@ -12,7 +12,7 @@ export const StakingProgramContext = createContext<{
   updateActiveStakingProgramId: () => Promise<void>;
 }>({
   activeStakingProgramId: undefined,
-  defaultStakingProgramId: StakingProgramId.Beta,
+  defaultStakingProgramId: StakingProgramId.PearlBeta,
   updateActiveStakingProgramId: async () => {},
 });
 
@@ -50,7 +50,7 @@ export const StakingProgramProvider = ({ children }: PropsWithChildren) => {
       value={{
         activeStakingProgramId,
         updateActiveStakingProgramId,
-        defaultStakingProgramId: StakingProgramId.Beta,
+        defaultStakingProgramId: StakingProgramId.PearlBeta,
       }}
     >
       {children}

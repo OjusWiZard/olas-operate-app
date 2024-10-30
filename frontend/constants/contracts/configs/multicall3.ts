@@ -1,0 +1,6 @@
+import { CHAINS } from '@/constants/chains';
+
+export const MULTICALL3_CONTRACT_CONFIGS = {
+  [CHAINS.GNOSIS.chainId]: '0xcA11bde05977b3631167028862bE2a173976CA11',
+  [CHAINS.OPTIMISM.chainId]: '0xcA11bde05977b3631167028862bE2a173976CA11',
+};

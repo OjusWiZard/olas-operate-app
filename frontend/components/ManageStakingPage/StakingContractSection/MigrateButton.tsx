@@ -2,7 +2,7 @@ import { Button, Popover } from 'antd';
 import { isNil } from 'lodash';
 import { useMemo } from 'react';
 
-import { DeploymentStatus } from '@/client';
+import { MiddlewareDeploymentStatus } from '@/types/middleware';
 import { Pages } from '@/enums/PageState';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { useBalance } from '@/hooks/useBalance';
@@ -77,7 +77,7 @@ export const MigrateButton = ({ stakingProgramId }: MigrateButtonProps) => {
           setIsBalancePollingPaused(true);
 
           try {
-            setServiceStatus(DeploymentStatus.DEPLOYING);
+            setServiceStatus(MiddlewareDeploymentStatus.DEPLOYING);
             goto(Pages.Main);
 
             await ServicesService.createService({
@@ -85,7 +85,7 @@ export const MigrateButton = ({ stakingProgramId }: MigrateButtonProps) => {
               serviceTemplate,
               deploy: true,
               useMechMarketplace:
-                stakingProgramId === StakingProgramId.BetaMechMarketplace,
+                stakingProgramId === StakingProgramId.PearlBetaMechMarketplace,
             });
 
             await updateStakingProgram();

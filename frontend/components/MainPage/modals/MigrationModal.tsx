@@ -1,7 +1,7 @@
 import { Button, Flex, Modal, Typography } from 'antd';
 import Image from 'next/image';
 
-import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
+import { STAKING_PROGRAMS } from '@/constants/stakingPrograms';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { MODAL_WIDTH } from '@/constants/width';
 import { useStakingProgram } from '@/hooks/useStakingProgram';
@@ -21,7 +21,7 @@ export const MigrationSuccessModal = ({
     return null;
   }
 
-  const activeStakingProgramMeta = STAKING_PROGRAM_META[activeStakingProgramId];
+  const activeStakingProgramMeta = STAKING_PROGRAMS[activeStakingProgramId];
 
   return (
     <Modal

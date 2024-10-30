@@ -1,10 +1,10 @@
 import { Flex, theme, Typography } from 'antd';
 import { useMemo } from 'react';
 
-import { Chain } from '@/client';
+import { MiddlewareChain } from '@/types/middleware';
 import { CardSection } from '@/components/styled/CardSection';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contractAddresses';
-import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
+import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contracts/config';
+import { STAKING_PROGRAMS } from '@/constants/stakingPrograms';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { StakingProgramId } from '@/enums/StakingProgram';
 import { StakingProgramStatus } from '@/enums/StakingProgramStatus';
@@ -32,11 +32,11 @@ export const StakingContractSection = ({
   const { migrateValidation } = useMigrate(stakingProgramId);
 
   const stakingContractAddress =
-    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS][
+    SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[MiddlewareChain.GNOSIS][
       stakingProgramId
     ];
 
-  const stakingProgramMeta = STAKING_PROGRAM_META[stakingProgramId];
+  const stakingProgramMeta = STAKING_PROGRAMS[stakingProgramId];
 
   /**
    * Returns `true` if this stakingProgram is active,

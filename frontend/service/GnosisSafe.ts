@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 
-import { GNOSIS_SAFE_ABI } from '@/abis/gnosisSafe';
+import { GNOSIS_SAFE_ABI } from '@/constants/contracts/abis/gnosisSafe';
 import { gnosisProvider } from '@/constants/providers';
 import { Address } from '@/types/Address';
 

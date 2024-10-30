@@ -1,24 +1,24 @@
-import { ServiceTemplate } from '@/client';
+import { ServiceTemplate } from '@/types/middleware';
 import { StakingProgramId } from '@/enums/StakingProgram';
 
 /** TODO: update from hardcoded, workaround for quick release */
 export const getMinimumStakedAmountRequired = (
   serviceTemplate?: ServiceTemplate, //TODO: remove, as unused
-  stakingProgramId: StakingProgramId = StakingProgramId.Beta,
+  stakingProgramId: StakingProgramId = StakingProgramId.PearlBeta,
 ): number | undefined => {
-  if (stakingProgramId === StakingProgramId.Alpha) {
+  if (stakingProgramId === StakingProgramId.PearlAlpha) {
     return 20;
   }
 
-  if (stakingProgramId === StakingProgramId.Beta) {
+  if (stakingProgramId === StakingProgramId.PearlBeta) {
     return 40;
   }
 
-  if (stakingProgramId === StakingProgramId.Beta2) {
+  if (stakingProgramId === StakingProgramId.PearlBeta2) {
     return 100;
   }
 
-  if (stakingProgramId === StakingProgramId.BetaMechMarketplace) {
+  if (stakingProgramId === StakingProgramId.PearlBetaMechMarketplace) {
     return 40;
   }
 

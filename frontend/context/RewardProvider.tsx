@@ -85,7 +85,7 @@ export const RewardProvider = ({ children }: PropsWithChildren) => {
           service.chain_configs[CHAINS.GNOSIS.chainId].chain_data.multisig!,
         serviceId:
           service.chain_configs[CHAINS.GNOSIS.chainId].chain_data.token!,
-        stakingProgram: activeStakingProgramId,
+        stakingProgramId: activeStakingProgramId,
       });
     }
 

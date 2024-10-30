@@ -2,7 +2,7 @@ import { RightOutlined } from '@ant-design/icons';
 import { Button, Flex, Popover, Skeleton, Typography } from 'antd';
 import { useMemo } from 'react';
 
-import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
+import { STAKING_PROGRAMS } from '@/constants/stakingPrograms';
 import { Pages } from '@/enums/PageState';
 import { useBalance } from '@/hooks/useBalance';
 import { useNeedsFunds } from '@/hooks/useNeedsFunds';
@@ -25,7 +25,7 @@ export const StakingContractUpdate = () => {
 
   const stakingContractName = useMemo(() => {
     if (activeStakingProgramMeta) return activeStakingProgramMeta.name;
-    return STAKING_PROGRAM_META[defaultStakingProgramId].name;
+    return STAKING_PROGRAMS[defaultStakingProgramId].name;
   }, [activeStakingProgramMeta, defaultStakingProgramId]);
 
   const canUpdateStakingContract = useMemo(() => {

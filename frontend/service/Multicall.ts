@@ -1,9 +1,9 @@
 import { BigNumber, ethers } from 'ethers';
 import { Contract as MulticallContract, ContractCall } from 'ethers-multicall';
 
-import { ERC20_BALANCEOF_FRAGMENT } from '@/abis/erc20';
-import { MULTICALL3_ABI } from '@/abis/multicall3';
-import { MULTICALL_CONTRACT_ADDRESS } from '@/constants/contractAddresses';
+import { ERC20_BALANCEOF_FRAGMENT } from '@/constants/contracts/abis/erc20';
+import { MULTICALL3_ABI } from '@/constants/contracts/abis/multicall3';
+import { MULTICALL_CONTRACT_ADDRESS } from '@/constants/contracts/config';
 import { gnosisMulticallProvider } from '@/constants/providers';
 import { Address } from '@/types/Address';
 import { AddressNumberRecord } from '@/types/Records';

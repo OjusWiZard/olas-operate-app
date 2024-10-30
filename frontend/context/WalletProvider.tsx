@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
 import { useInterval } from 'usehooks-ts';
 
-import { Wallet } from '@/client';
+import { Wallet } from '@/types/middleware';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
 import { WalletService } from '@/service/Wallet';
 import { Address } from '@/types/Address';

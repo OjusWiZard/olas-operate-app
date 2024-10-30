@@ -19,12 +19,12 @@ import {
 import { CSSProperties, ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Chain } from '@/client';
+import { MiddlewareChain } from '@/types/middleware';
 import { CardTitle } from '@/components/Card/CardTitle';
 import { CardFlex } from '@/components/styled/CardFlex';
 import { COLOR } from '@/constants/colors';
-import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contractAddresses';
-import { STAKING_PROGRAM_META } from '@/constants/stakingProgramMeta';
+import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contracts/config';
+import { STAKING_PROGRAMS } from '@/constants/stakingPrograms';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { Pages } from '@/enums/PageState';
 import { StakingProgramId } from '@/enums/StakingProgram';
@@ -153,7 +153,7 @@ const ContractRewards = ({
 }) => (
   <Flex vertical>
     <ContractName>
-      <Text strong>{STAKING_PROGRAM_META[stakingProgramId].name}</Text>
+      <Text strong>{STAKING_PROGRAMS[stakingProgramId].name}</Text>
     </ContractName>
 
     {checkpoints.map((checkpoint) => {
@@ -194,7 +194,7 @@ export const RewardsHistory = () => {
         {Object.keys(contractCheckpoints).map((contractAddress: string) => {
           const checkpoints = contractCheckpoints[contractAddress];
           const [stakingProgramId] = Object.entries(
-            SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[Chain.GNOSIS],
+            SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES[MiddlewareChain.GNOSIS],
           ).find((entry) => {
             const [, stakingProxyAddress] = entry;
             return (

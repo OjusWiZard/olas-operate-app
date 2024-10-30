@@ -14,7 +14,7 @@ import {
 import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Chain } from '@/client';
+import { MiddlewareChain } from '@/types/middleware';
 import { CustomAlert } from '@/components/Alert';
 import { CardFlex } from '@/components/styled/CardFlex';
 import { CardSection } from '@/components/styled/CardSection';
@@ -39,7 +39,7 @@ export const SetupEoaFunding = ({
 
   const isFundedMasterEoa =
     eoaBalance?.ETH &&
-    eoaBalance.ETH >= MIN_ETH_BALANCE_THRESHOLDS[Chain.GNOSIS].safeCreation;
+    eoaBalance.ETH >= MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation;
 
   const statusMessage = useMemo(() => {
     if (isFundedMasterEoa) {
@@ -63,7 +63,7 @@ export const SetupEoaFunding = ({
         disabled={isIncomplete}
       />
       <Typography.Title level={3}>
-        Deposit {MIN_ETH_BALANCE_THRESHOLDS[Chain.GNOSIS].safeCreation} XDAI on
+        Deposit {MIN_ETH_BALANCE_THRESHOLDS[MiddlewareChain.GNOSIS].safeCreation} XDAI on
         Gnosis
       </Typography.Title>
       <Typography.Paragraph style={{ marginBottom: 0 }}>

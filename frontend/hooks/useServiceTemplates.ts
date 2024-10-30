@@ -1,4 +1,4 @@
-import { ServiceTemplate } from '@/client/types';
+import { ServiceTemplate } from '@/types/middleware/types';
 import { SERVICE_TEMPLATES } from '@/constants/serviceTemplates';
 
 export const useServiceTemplates = () => {

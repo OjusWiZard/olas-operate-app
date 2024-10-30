@@ -14,7 +14,7 @@ import {
 } from 'react';
 import { useInterval } from 'usehooks-ts';
 
-import { Wallet } from '@/client';
+import { Wallet } from '@/types/middleware';
 import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
 import {
