@@ -1,4 +1,6 @@
-export const MECH_MARKETPLACE_ABI = [
+import { JsonFragment } from '@ethersproject/abi';
+
+export const MECH_MARKETPLACE_ABI: JsonFragment[] = [
   {
     inputs: [
       { internalType: 'address', name: '_stakingFactory', type: 'address' },

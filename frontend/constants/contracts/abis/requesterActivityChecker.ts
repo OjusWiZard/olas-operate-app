@@ -1,4 +1,6 @@
-export const REQUESTER_ACTIVITY_CHECKER_ABI = [
+import { JsonFragment } from '@ethersproject/abi';
+
+export const REQUESTER_ACTIVITY_CHECKER_ABI: JsonFragment[] = [
   {
     inputs: [
       { internalType: 'address', name: '_mechMarketplace', type: 'address' },

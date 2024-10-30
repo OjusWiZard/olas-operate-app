@@ -1,4 +1,6 @@
-export const SERVICE_REGISTRY_L2_ABI = [
+import { JsonFragment } from '@ethersproject/abi';
+
+export const SERVICE_REGISTRY_L2_ABI: JsonFragment[] = [
   {
     inputs: [
       { internalType: 'string', name: '_name', type: 'string' },

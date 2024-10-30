@@ -1,4 +1,6 @@
-export const SERVICE_REGISTRY_TOKEN_UTILITY_ABI = [
+import { JsonFragment } from '@ethersproject/abi';
+
+export const SERVICE_REGISTRY_TOKEN_UTILITY_ABI: JsonFragment[] = [
   {
     inputs: [
       { internalType: 'address', name: '_serviceRegistry', type: 'address' },

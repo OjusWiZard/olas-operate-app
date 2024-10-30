@@ -1,4 +1,6 @@
-export const GNOSIS_SAFE_ABI = [
+import { JsonFragment } from '@ethersproject/abi';
+
+export const GNOSIS_SAFE_ABI: JsonFragment[] = [
   { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
   {
     anonymous: false,

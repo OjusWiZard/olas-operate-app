@@ -1,4 +1,6 @@
-export const MULTICALL3_ABI = [
+import { JsonFragment } from '@ethersproject/abi';
+
+export const MULTICALL3_ABI: JsonFragment[] = [
   {
     inputs: [
       {

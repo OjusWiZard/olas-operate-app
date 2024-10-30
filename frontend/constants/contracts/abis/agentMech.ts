@@ -1,4 +1,6 @@
-export const AGENT_MECH_ABI = [
+import { JsonFragment } from '@ethersproject/abi';
+
+export const AGENT_MECH_ABI: JsonFragment[] = [
   {
     inputs: [
       { internalType: 'address', name: '_token', type: 'address' },

@@ -1,4 +1,6 @@
-export const STAKING_TOKEN_ABI = [
+import { JsonFragment } from '@ethersproject/abi';
+
+export const STAKING_TOKEN_ABI: JsonFragment[] = [
   {
     inputs: [],
     name: 'AlreadyInitialized',
