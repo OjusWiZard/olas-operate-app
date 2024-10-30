@@ -4,15 +4,18 @@ import { SERVICE_REGISTRY_L2_CONTRACT_CONFIGS } from '../configs/service-registr
 
 export const SERVICE_REGISTRY_L2_CONTRACTS: {
   [chainId: number]: MulticallContract;
-} = Object.keys(SERVICE_REGISTRY_L2_CONTRACT_CONFIGS).reduce((acc, chainId) => {
-  if (!chainId) return acc;
-  if (!Number.isFinite(+chainId)) return acc;
-  if (!Number.isInteger(+chainId)) return acc;
+} = Object.entries(SERVICE_REGISTRY_L2_CONTRACT_CONFIGS).reduce(
+  (acc, [chainId, { address, abi }]) => {
+    if (!chainId) return acc;
+    if (!Number.isFinite(+chainId)) return acc;
+    if (!Number.isInteger(+chainId)) return acc;
 
-  const { address, abi } = SERVICE_REGISTRY_L2_CONTRACT_CONFIGS[+chainId];
-
-  return {
-    ...acc,
-    [+chainId]: new MulticallContract(address, abi),
-  };
-}, {});
+    return {
+      ...acc,
+      [+chainId]: new MulticallContract(address, abi),
+    };
+  },
+  {} as {
+    [chainId: number]: MulticallContract;
+  },
+);

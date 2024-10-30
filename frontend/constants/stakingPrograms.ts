@@ -1,8 +1,6 @@
 import { CHAINS } from './chains';
 
-export const STAKING_PROGRAM_IDS: {
-  [stakingProgramName: string]: string;
-} = {
+export const STAKING_PROGRAM_IDS = {
   PearlAlpha: 'pearl_alpha',
   PearlBeta: 'pearl_beta',
   PearlBeta2: 'pearl_beta_2',
@@ -23,7 +21,7 @@ export const STAKING_PROGRAMS: Partial<{
     [stakingProgramId in keyof typeof STAKING_PROGRAM_IDS]: Partial<StakingProgram>;
   }>;
 }> = {
-  [CHAINS.GNOSIS.chainId]: {
+  [CHAINS.Gnosis.chainId]: {
     [STAKING_PROGRAM_IDS.PearlAlpha]: {
       name: 'Pearl Alpha',
       canMigrateTo: [
@@ -58,7 +56,7 @@ export const STAKING_PROGRAMS: Partial<{
       deprecated: false,
     },
   },
-  [CHAINS.OPTIMISM.chainId]: {
+  [CHAINS.Optimism.chainId]: {
     [STAKING_PROGRAM_IDS.OptimusAlpha]: {
       name: 'Optimus Alpha',
       canMigrateTo: [],

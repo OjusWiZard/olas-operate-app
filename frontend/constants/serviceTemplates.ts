@@ -1,5 +1,7 @@
 import { ServiceTemplate } from '@/types/middleware';
-import { StakingProgramId } from '@/enums/StakingProgram';
+
+import { CHAIN_IDS } from './chains';
+import { STAKING_PROGRAM_IDS } from './stakingPrograms';
 
 export const SERVICE_TEMPLATES: ServiceTemplate[] = [
   {
@@ -11,8 +13,8 @@ export const SERVICE_TEMPLATES: ServiceTemplate[] = [
     service_version: 'v0.18.4',
     home_chain_id: '100',
     configurations: {
-      100: {
-        staking_program_id: StakingProgramId.PearlBeta, // default, may be overwritten
+      [CHAIN_IDS.Gnosis]: {
+        staking_program_id: STAKING_PROGRAM_IDS.PearlBeta, // default, may be overwritten
         nft: 'bafybeig64atqaladigoc3ds4arltdu63wkdrk3gesjfvnfdmz35amv7faq',
         rpc: 'http://localhost:8545',
         agent_id: 14,

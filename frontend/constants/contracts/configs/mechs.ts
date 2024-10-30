@@ -1,29 +1,19 @@
-import { CHAINS, SupportedChainId } from '@/constants/chains';
+import { CHAINS } from '@/constants/chains';
 
 import { AGENT_MECH_ABI } from '../abis/agentMech';
 import { MECH_ACTIVITY_CHECKER_ABI } from '../abis/mechActivityChecker';
 import { MECH_MARKETPLACE_ABI } from '../abis/mechMarketplace';
 import { REQUESTER_ACTIVITY_CHECKER_ABI } from '../abis/requesterActivityChecker';
-import { ContractConfig } from './types';
 
-export const MECH_SLUGS: {
-  [mechName: string]: string;
-} = {
+export const MECH_SLUGS = {
   Agent: 'agent-mech',
   Marketplace: 'mech-marketplace',
 } as const;
 
 export type MechSlug = keyof typeof MECH_SLUGS;
 
-type MechContractConfig = ContractConfig & {
-  activityChecker: ContractConfig;
-};
-export const MECH_CONTRACT_CONFIGS: {
-  [chainId: SupportedChainId]: {
-    [mechType: MechSlug]: MechContractConfig;
-  };
-} = {
-  [CHAINS.GNOSIS.chainId]: {
+export const MECH_CONTRACT_CONFIGS = {
+  [CHAINS.Gnosis.chainId]: {
     [MECH_SLUGS.Agent]: {
       address: '0x77af31De935740567Cf4fF1986D04B2c964A786a',
       abi: AGENT_MECH_ABI,
@@ -42,4 +32,4 @@ export const MECH_CONTRACT_CONFIGS: {
     },
   },
   //   [CHAINS.OPTIMISM.chainId]: {},
-};
+} as const;

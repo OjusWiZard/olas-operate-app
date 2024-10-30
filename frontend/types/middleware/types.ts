@@ -66,7 +66,7 @@ export type ServiceTemplate = {
 
 export type ConfigurationTemplate = {
   rpc?: string; // added on deployment
-  staking_program_id?: StakingProgramId; // added on deployment
+  staking_program_id?: string; // added on deployment
   nft: string;
   agent_id: number;
   threshold: number;

@@ -1,49 +1,61 @@
 type HttpRpc = `https://${string}`;
 
-type ChainConfig = {
+export type ChainConfig = {
   chainId: number;
   currency: string;
   rpc: HttpRpc;
 };
 
-export const CHAINS: {
-  [name: string]: ChainConfig;
-} = {
-  ETHEREUM: {
+export const CHAINS = {
+  Ethereum: {
     currency: 'ETH',
     chainId: 1,
     rpc: `${process.env.ETHEREUM_RPC}` as HttpRpc,
   },
-  OPTIMISM: {
+  Optimism: {
     currency: 'ETH',
     chainId: 10,
     rpc: `${process.env.OPTIMISM_RPC}` as HttpRpc,
   },
-  GNOSIS: {
+  Gnosis: {
     currency: 'XDAI',
     chainId: 100,
     rpc: `${process.env.GNOSIS_RPC}` as HttpRpc,
   },
-  BASE: {
+  Base: {
     currency: 'ETH',
     chainId: 8453,
     rpc: `${process.env.BASE_RPC}` as HttpRpc,
   },
-  // MODE: { currency: 'ETH', chainId: 34443 },
-};
+  // Mode: { currency: 'ETH', chainId: 34443 },
+} as const;
 
-export const CHAINS_BY_CHAIN_ID: {
-  [chainId: number]: ChainConfig & { name: string };
+export type SupportedChainName = keyof typeof CHAINS;
+export type SupportedChainId = (typeof CHAINS)[SupportedChainName]['chainId'];
+
+type ChainsByChainId = {
+  [chainId in SupportedChainId]: ChainConfig & { name: SupportedChainName };
+};
+export const CHAINS_BY_CHAIN_IDS = Object.entries(CHAINS).reduce(
+  (acc, [name, chain]) => {
+    acc[chain.chainId] = {
+      ...chain,
+      name: name as SupportedChainName,
+    };
+    return acc;
+  },
+  {} as ChainsByChainId,
+);
+
+type ChainIds = {
+  [chainName in SupportedChainName]: (typeof CHAINS)[chainName]['chainId'];
+};
+export const CHAIN_IDS: {
+  [chainName in SupportedChainName]: SupportedChainId;
 } = Object.entries(CHAINS).reduce(
   (acc, [name, chain]) => ({
     ...acc,
-    [chain.chainId]: {
-      ...chain,
-      name,
-    },
+    [name]: chain.chainId,
   }),
-  {},
+  {} as ChainIds,
 );
-
-export type SupportedChainId = keyof typeof CHAINS_BY_CHAIN_ID;
-export type SupportedChainName = keyof typeof CHAINS;

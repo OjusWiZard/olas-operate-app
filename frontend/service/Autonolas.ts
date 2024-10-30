@@ -1,7 +1,6 @@
 import { BigNumber, ethers } from 'ethers';
 import { formatEther } from 'ethers/lib/utils';
 
-import { CHAINS_BY_CHAIN_ID, SupportedChainId } from '@/constants/chains';
 import { MECH_CONTRACTS } from '@/constants/contracts/instances/mechs';
 import { SERVICE_REGISTRY_L2_CONTRACTS } from '@/constants/contracts/instances/service-registry-l2';
 import { SERVICE_REGISTRY_TOKEN_UTILITY_CONTRACTS } from '@/constants/contracts/instances/service-registry-token-utility';
@@ -205,23 +204,25 @@ const getStakingContractInfoByServiceIdStakingProgram = async (
 /**
  * Get staking contract info by staking program name
  * eg. Alpha, Beta, Beta2
+ * @param stakingProgramId string
+ * @param chainId number
  */
 const getStakingContractInfoByStakingProgram = async (
-  stakingProgram: keyof typeof STAKING_PROGRAM_IDS,
-  chainId: keyof typeof CHAINS_BY_CHAIN_ID,
+  stakingProgramId: string,
+  chainId: number,
 ): Promise<Partial<StakingContractInfo> | undefined> => {
   const stakingTokenProxy =
-    STAKING_TOKEN_PROXY_CONTRACTS[+chainId][stakingProgram];
+    STAKING_TOKEN_PROXY_CONTRACTS[+chainId][stakingProgramId];
 
   const contractCalls = [
-    stakingTokenProxy[stakingProgram].availableRewards(),
-    stakingTokenProxy[stakingProgram].maxNumServices(),
-    stakingTokenProxy[stakingProgram].getServiceIds(),
-    stakingTokenProxy[stakingProgram].minStakingDuration(),
-    stakingTokenProxy[stakingProgram].minStakingDeposit(),
-    stakingTokenProxy[stakingProgram].rewardsPerSecond(),
-    stakingTokenProxy[stakingProgram].numAgentInstances(),
-    stakingTokenProxy[stakingProgram].livenessPeriod(),
+    stakingTokenProxy[stakingProgramId].availableRewards(),
+    stakingTokenProxy[stakingProgramId].maxNumServices(),
+    stakingTokenProxy[stakingProgramId].getServiceIds(),
+    stakingTokenProxy[stakingProgramId].minStakingDuration(),
+    stakingTokenProxy[stakingProgramId].minStakingDeposit(),
+    stakingTokenProxy[stakingProgramId].rewardsPerSecond(),
+    stakingTokenProxy[stakingProgramId].numAgentInstances(),
+    stakingTokenProxy[stakingProgramId].livenessPeriod(),
   ];
 
   const provider = MULTICALL_PROVIDERS[chainId];
@@ -277,7 +278,7 @@ const getStakingContractInfoByStakingProgram = async (
 const getServiceRegistryInfo = async (
   operatorAddress: Address, // generally master safe address
   serviceId: number,
-  chainId: keyof typeof CHAINS_BY_CHAIN_ID,
+  chainId: number,
 ): Promise<
   | {
       bondValue: number;
@@ -324,18 +325,14 @@ const getServiceRegistryInfo = async (
  */
 const getCurrentStakingProgramByServiceId = async (
   serviceId: number,
-  chainId: SupportedChainId,
+  chainId: number,
 ): Promise<StakingProgramId | null | undefined> => {
   if (serviceId <= -1) return null;
 
   const stakingTokenProxy = STAKING_TOKEN_PROXY_CONTRACTS[chainId];
 
-  const contractCalls = Object.keys(STAKING_PROGRAM_IDS).reduce(
-    (acc: Promise<boolean>[], stakingProgramId: StakingProgramId) => [
-      ...acc,
-      stakingTokenProxy[stakingProgramId].getStakingState(serviceId),
-    ],
-    [],
+  const contractCalls = Object.values(stakingTokenProxy).map((proxy) =>
+    proxy.getStakingState(serviceId),
   );
 
   const provider = MULTICALL_PROVIDERS[chainId];

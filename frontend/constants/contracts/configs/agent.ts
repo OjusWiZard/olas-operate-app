@@ -1,6 +1,4 @@
-export const AGENT_SLUGS: {
-  [agentName: string]: string;
-} = {
+export const AGENT_SLUGS = {
   Predict: 'predict',
   Optimus: 'optimus',
 };

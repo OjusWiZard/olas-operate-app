@@ -1,7 +1,7 @@
-import { MiddlewareChain } from '@/types/middleware';
+import { CHAIN_IDS } from './chains';
 
 export const MIN_ETH_BALANCE_THRESHOLDS = {
-  [MiddlewareChain.GNOSIS]: {
+  [CHAIN_IDS.GNOSIS]: {
     safeCreation: 1.5,
     safeAddSigner: 0.1,
   },
