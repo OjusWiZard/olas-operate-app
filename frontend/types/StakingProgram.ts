@@ -1,4 +1,4 @@
-import { StakingProgramStatus } from '@/enums/StakingProgramStatus';
+import { StakingProgramStatus } from '@/constants/stakingProgramsStatus';
 
 import { Address } from './Address';
 

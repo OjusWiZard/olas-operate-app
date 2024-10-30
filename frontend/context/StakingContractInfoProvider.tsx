@@ -13,7 +13,7 @@ import { useInterval } from 'usehooks-ts';
 
 import { CHAINS } from '@/constants/chains';
 import { FIVE_SECONDS_INTERVAL } from '@/constants/intervals';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { AutonolasService } from '@/service/Autonolas';
 import { StakingContractInfo } from '@/types/Autonolas';
 

@@ -1,5 +1,5 @@
 import { ServiceTemplate } from '@/types/middleware';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 
 /** TODO: update from hardcoded, workaround for quick release */
 export const getMinimumStakedAmountRequired = (

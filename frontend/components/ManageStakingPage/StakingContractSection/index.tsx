@@ -3,10 +3,12 @@ import { useMemo } from 'react';
 
 import { CardSection } from '@/components/styled/CardSection';
 import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contracts/config';
-import { STAKING_PROGRAMS } from '@/constants/stakingPrograms';
+import {
+  STAKING_PROGRAMS,
+  StakingProgramId,
+} from '@/constants/stakingPrograms';
+import { StakingProgramStatus } from '@/constants/stakingProgramsStatus';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
-import { StakingProgramId } from '@/enums/StakingProgram';
-import { StakingProgramStatus } from '@/enums/StakingProgramStatus';
 import { useStakingProgram } from '@/hooks/useStakingProgram';
 import { MiddlewareChain } from '@/types/middleware';
 

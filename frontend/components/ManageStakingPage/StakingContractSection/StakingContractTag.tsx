@@ -1,6 +1,6 @@
 import { Tag } from 'antd';
 
-import { StakingProgramStatus } from '@/enums/StakingProgramStatus';
+import { StakingProgramStatus } from '@/constants/stakingProgramsStatus';
 
 export const StakingContractTag = ({
   status,

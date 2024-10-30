@@ -2,8 +2,8 @@ import { Button, Popover } from 'antd';
 import { isNil } from 'lodash';
 import { useMemo } from 'react';
 
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { Pages } from '@/enums/PageState';
-import { StakingProgramId } from '@/enums/StakingProgram';
 import { useBalance } from '@/hooks/useBalance';
 import { useModals } from '@/hooks/useModals';
 import { usePageState } from '@/hooks/usePageState';

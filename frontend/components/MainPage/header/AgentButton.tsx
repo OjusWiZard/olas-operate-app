@@ -3,7 +3,7 @@ import { Button, ButtonProps, Flex, Popover, Tooltip, Typography } from 'antd';
 import { useCallback, useMemo } from 'react';
 
 import { COLOR } from '@/constants/colors';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { useBalance } from '@/hooks/useBalance';
 import { useElectronApi } from '@/hooks/useElectronApi';
 import { useReward } from '@/hooks/useReward';

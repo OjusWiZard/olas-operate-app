@@ -2,7 +2,7 @@ import { Alert, Skeleton } from 'antd';
 import { useMemo } from 'react';
 
 import { InfoBreakdownList } from '@/components/InfoBreakdown';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { useStakingContractInfo } from '@/hooks/useStakingContractInfo';
 
 export const StakingContractDetails = ({

@@ -23,10 +23,12 @@ import { CardTitle } from '@/components/Card/CardTitle';
 import { CardFlex } from '@/components/styled/CardFlex';
 import { COLOR } from '@/constants/colors';
 import { SERVICE_STAKING_TOKEN_MECH_USAGE_CONTRACT_ADDRESSES } from '@/constants/contracts/config';
-import { STAKING_PROGRAMS } from '@/constants/stakingPrograms';
+import {
+  STAKING_PROGRAMS,
+  StakingProgramId,
+} from '@/constants/stakingPrograms';
 import { UNICODE_SYMBOLS } from '@/constants/symbols';
 import { Pages } from '@/enums/PageState';
-import { StakingProgramId } from '@/enums/StakingProgram';
 import { usePageState } from '@/hooks/usePageState';
 import { MiddlewareChain } from '@/types/middleware';
 import { balanceFormat } from '@/utils/numberFormatters';

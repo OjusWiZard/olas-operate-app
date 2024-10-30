@@ -3,7 +3,7 @@ import { Button, Card } from 'antd';
 
 import { STAKING_PROGRAMS } from '@/constants/stakingPrograms';
 import { Pages } from '@/enums/PageState';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { usePageState } from '@/hooks/usePageState';
 import { useStakingProgram } from '@/hooks/useStakingProgram';
 

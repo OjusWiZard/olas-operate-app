@@ -2,7 +2,7 @@ import { createContext, PropsWithChildren, useCallback, useState } from 'react';
 import { useInterval } from 'usehooks-ts';
 
 import { CHAINS } from '@/constants/chains';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { useServices } from '@/hooks/useServices';
 import { AutonolasService } from '@/service/Autonolas';
 

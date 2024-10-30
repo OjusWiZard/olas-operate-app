@@ -2,7 +2,7 @@ import { Flex, Typography } from 'antd';
 import { isNil } from 'lodash';
 
 import { CustomAlert } from '@/components/Alert';
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { useBalance } from '@/hooks/useBalance';
 import { useServiceTemplates } from '@/hooks/useServiceTemplates';
 import { useStakingContractInfo } from '@/hooks/useStakingContractInfo';
