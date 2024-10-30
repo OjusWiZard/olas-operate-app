@@ -12,12 +12,12 @@ export const SERVICE_REGISTRY_TOKEN_UTILITY_CONTRACTS: {
     if (!Number.isFinite(+chainId)) return acc;
     if (!Number.isInteger(+chainId)) return acc;
 
+    const { address, abi } =
+      SERVICE_REGISTRY_TOKEN_UTILITY_CONTRACT_CONFIGS[+chainId];
+
     return {
       ...acc,
-      [+chainId]: new MulticallContract(
-        SERVICE_REGISTRY_TOKEN_UTILITY_CONTRACT_CONFIGS[+chainId].address,
-        SERVICE_REGISTRY_TOKEN_UTILITY_CONTRACT_CONFIGS[+chainId].abi,
-      ),
+      [+chainId]: new MulticallContract(address, abi),
     };
   },
   {},

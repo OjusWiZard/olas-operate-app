@@ -1,6 +1,8 @@
-export const AGENT_TYPES: {
+export const AGENT_SLUGS: {
   [agentName: string]: string;
 } = {
-  PREDICT: 'predict',
-  OPTIMUS: 'optimus',
+  Predict: 'predict',
+  Optimus: 'optimus',
 };
+
+export type AgentSlug = keyof typeof AGENT_SLUGS;

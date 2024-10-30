@@ -1,13 +1,17 @@
 import { Contract as MulticallContract } from 'ethers-multicall';
 
-import { MECH_CONTRACT_CONFIGS } from '../configs/mechs';
+import { SupportedChainId } from '@/constants/chains';
+
+import { MECH_CONTRACT_CONFIGS, MechSlug } from '../configs/mechs';
+
+type MechAndActivityContract = {
+  mech: MulticallContract;
+  activityChecker: MulticallContract;
+};
 
 export const MECH_CONTRACTS: {
-  [chainId: number]: {
-    [mechType: string]: {
-      mech: MulticallContract;
-      activityChecker: MulticallContract;
-    };
+  [chainId: SupportedChainId]: {
+    [mechSlug: MechSlug]: MechAndActivityContract;
   };
 } = Object.keys(MECH_CONTRACT_CONFIGS).reduce((acc, chainId) => {
   if (!chainId) return acc;
@@ -17,15 +21,15 @@ export const MECH_CONTRACTS: {
   return {
     ...acc,
     [+chainId]: Object.keys(MECH_CONTRACT_CONFIGS[+chainId]).reduce(
-      (acc2, mechType) => {
+      (acc2, mechSlug) => {
         const {
           address,
           abi,
           activityChecker: { address: acAddress, abi: acAbi },
-        } = MECH_CONTRACT_CONFIGS[+chainId][mechType];
+        } = MECH_CONTRACT_CONFIGS[+chainId][mechSlug];
         return {
           ...acc2,
-          [mechType]: {
+          [mechSlug]: {
             mech: new MulticallContract(address, abi),
             activityChecker: new MulticallContract(acAddress, acAbi),
           },

@@ -1,7 +1,7 @@
 import { BigNumber, ethers } from 'ethers';
 import { Contract as MulticallContract, ContractCall } from 'ethers-multicall';
 
-import { ERC20_BALANCEOF_FRAGMENT } from '@/constants/contracts/abis/erc20';
+import { ERC20_BALANCEOF_STRING_FRAGMENT } from '@/constants/contracts/abis/erc20';
 import { MULTICALL3_ABI } from '@/constants/contracts/abis/multicall3';
 import { MULTICALL_CONTRACT_ADDRESS } from '@/constants/contracts/config';
 import { gnosisMulticallProvider } from '@/constants/providers';
@@ -57,7 +57,7 @@ const getErc20Balances = async (
   if (!addresses.length) return {};
 
   const callData: ContractCall[] = addresses.map((address: Address) =>
-    new MulticallContract(contractAddress, ERC20_BALANCEOF_FRAGMENT).balanceOf(
+    new MulticallContract(contractAddress, ERC20_BALANCEOF_STRING_FRAGMENT).balanceOf(
       address,
     ),
   );

@@ -1,4 +1,4 @@
-import { StakingProgramId } from '@/enums/StakingProgram';
+import { StakingProgramId } from '@/constants/stakingPrograms';
 import { Address } from '@/types/Address';
 
 import {
@@ -40,7 +40,7 @@ export type ChainData = {
   };
 };
 
-export type Service = {
+export type MiddlewareService = {
   name: string;
   hash: string;
   keys: ServiceKeys[];

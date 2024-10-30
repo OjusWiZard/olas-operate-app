@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { Service, ServiceHash, ServiceTemplate } from '@/types/middleware';
+import { MiddlewareService, ServiceHash, ServiceTemplate } from '@/types/middleware';
 import { CHAINS } from '@/constants/chains';
 import { ServicesContext } from '@/context/ServicesProvider';
 import MulticallService from '@/service/Multicall';
@@ -9,7 +9,7 @@ import { Address } from '@/types/Address';
 import { AddressBooleanRecord } from '@/types/Records';
 
 const checkServiceIsFunded = async (
-  service: Service,
+  service: MiddlewareService,
   serviceTemplate: ServiceTemplate,
 ): Promise<boolean> => {
   const {
@@ -63,17 +63,17 @@ export const useServices = () => {
   // STATE METHODS
   const getServiceFromState = (
     serviceHash: ServiceHash,
-  ): Service | undefined => {
+  ): MiddlewareService | undefined => {
     if (!hasInitialLoaded) return;
     if (!services) return;
     return services.find((service) => service.hash === serviceHash);
   };
 
-  const getServicesFromState = (): Service[] | undefined =>
+  const getServicesFromState = (): MiddlewareService[] | undefined =>
     hasInitialLoaded ? services : [];
 
   const updateServiceState = (serviceHash: ServiceHash) => {
-    ServicesService.getService(serviceHash).then((service: Service) => {
+    ServicesService.getService(serviceHash).then((service: MiddlewareService) => {
       setServices((prev) => {
         if (!prev) return [service];
 
