@@ -18,6 +18,7 @@
 # ------------------------------------------------------------------------------
 
 """Tendermint manager."""
+import multiprocessing
 import json
 import logging
 import os
@@ -28,12 +29,13 @@ import signal
 import stat
 import subprocess  # nosec:
 import sys
+from time import sleep
 import traceback
 from logging import Logger
 from pathlib import Path
 from threading import Event, Thread
 from typing import Any, Callable, Dict, List, Optional, Tuple, cast
-
+from flask import g
 import requests
 from flask import Flask, Response, jsonify, request
 from werkzeug.exceptions import InternalServerError, NotFound
@@ -310,8 +312,8 @@ class TendermintNode:
 
     def stop(self) -> None:
         """Stop a Tendermint node process."""
-        self._stop_tm_process()
         self._stop_monitoring_thread()
+        self._stop_tm_process()
 
     @staticmethod
     def _write_to_console(line: str) -> None:
@@ -503,6 +505,7 @@ def create_app(  # pylint: disable=too-many-statements
     )
 
     app = Flask(__name__)  # pylint: disable=redefined-outer-name
+    app._is_on_exit = False  # ugly but better than global ver
     period_dumper = PeriodDumper(
         logger=app.logger,
         dump_dir=Path(os.environ["TMSTATE"]),
@@ -570,6 +573,8 @@ def create_app(  # pylint: disable=too-many-statements
     @app.route("/gentle_reset")
     def gentle_reset() -> Tuple[Any, int]:
         """Reset the tendermint node gently."""
+        if app._is_on_exit:
+            raise RuntimeError("server exit now")
         try:
             tendermint_node.stop()
             tendermint_node.start()
@@ -597,6 +602,8 @@ def create_app(  # pylint: disable=too-many-statements
     @app.route("/hard_reset")
     def hard_reset() -> Tuple[Any, int]:
         """Reset the node forcefully, and prune the blocks"""
+        if app._is_on_exit:
+            raise RuntimeError("server exit now")
         try:
             tendermint_node.stop()
             if IS_DEV_MODE:
@@ -639,7 +646,41 @@ def create_server() -> Any:
     return flask_app
 
 
-if __name__ == "__main__":
-    # Start the Flask server programmatically
+def run_app_in_subprocess(q: multiprocessing.Queue):
+    print("app in subprocess")
+    app, tendermint_node = create_app()
+
+    @app.route("/exit")
+    def handle_server_exit() -> Response:
+        """Handle server exit."""
+        app._is_on_exit = True
+        tendermint_node.stop()
+
+        q.put(True)
+        return {"node": "stopped"}
+
+    app.run(host="localhost", port=8080)
+
+
+def run_stoppable_main():
+    print("run stoppable main!")
+    q = multiprocessing.Queue()
+    p = multiprocessing.Process(target=run_app_in_subprocess, args=(q,))
+    p.start()
+    # wait for stop marker
+    q.get(block=True)
+    sleep(1)
+    p.terminate()
+
+
+def main():
     app = create_server()
     app.run(host="localhost", port=8080)
+
+
+if __name__ == "__main__":
+    # Start the Flask server programmatically
+    if sys.platform.startswith("win"):
+        # On Windows calling this function is necessary.
+        multiprocessing.freeze_support()
+    run_stoppable_main()
