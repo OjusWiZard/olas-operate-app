@@ -852,11 +852,10 @@ class ServiceManager:
         ocm = self.get_on_chain_manager(ledger_config=ledger_config)
         info = ocm.info(token_id=chain_data.token)
         chain_data.on_chain_state = OnChainState(info["service_state"])
-        
-        print(111, chain_data.on_chain_state, info )
+
         if chain_data.on_chain_state != OnChainState.DEPLOYED:
             self.logger.info("Cannot terminate service")
-            #return
+            return
 
         self.logger.info("Terminating service")
         ocm.terminate(
@@ -929,7 +928,7 @@ class ServiceManager:
                     service_id=chain_data.token,
                 )
             ).settle()
-        return
+
         if (
             self._get_on_chain_state(service=service, chain_id=chain_id)
             == OnChainState.TERMINATED_BONDED
