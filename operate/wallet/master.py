@@ -399,10 +399,12 @@ class MasterWalletManager:
         :param ledger_type: Ledger type for the wallet.
         :return: Master wallet object
         """
+        
         if ledger_type == LedgerType.ETHEREUM:
             wallet = EthereumMasterWallet.load(path=self.path)
         else:
             raise ValueError(f"{ledger_type} is not supported.")
+       
         wallet.password = self.password
         return wallet
 

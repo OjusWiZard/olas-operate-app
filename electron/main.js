@@ -136,8 +136,7 @@ async function beforeQuit() {
     try {
       await killProcessesByNameRegex(new RegExp('pearl_*'));
     } catch (e) {
-      logger.electron("Couldn't kill daemon processes via name regex:");
-      logger.electron(JSON.stringify(e));
+      logger.electron("[ON QUIT] Couldn't kill daemon processes via name regex: " + JSON.stringify(e));
     }
   }
 
@@ -305,8 +304,17 @@ async function launchDaemon() {
       .trim();
 
     await fetch(`http://localhost:${appConfig.ports.prod.operate}/${endpoint}`);
+    logger.electron("[ON START] killed daemon processes via endpoint!");
   } catch (err) {
-    logger.electron('Backend not running!');
+    logger.electron('Backend not running! ' + JSON.stringify(err));
+  }
+
+  // clean-up via name regex
+  try {
+    await killProcessesByNameRegex(new RegExp('pearl_*'));
+    logger.electron("[ON START] killed daemon processes via name regex!");
+  } catch (e) {
+    logger.electron("[ON START] Couldn't kill daemon processes via name regex: " + JSON.stringify(e));
   }
 
   const check = new Promise(function (resolve, _reject) {
